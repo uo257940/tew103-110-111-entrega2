@@ -10,13 +10,14 @@ import com.tew.business.exception.EntityNotFoundException;
 import com.tew.model.Pisos;
 
 // URL en la que el web service responderá
-@Path("/PisossServicesRs")
+@Path("/PisosServicesRs")
 public interface PisosServicesRs extends PisosService{
 
    // responde a peticiones GET
    @GET
    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-   public List<Pisos> getPisos();
+   public List<Pisos> Pisos();
+   
 	
    
    @GET
@@ -24,13 +25,13 @@ public interface PisosServicesRs extends PisosService{
    @Path("{id}")
    // formato en el que los datos se retornan en el método
    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-   Pisos findById(@PathParam("id") Long id) throws EntityNotFoundException;
+   Pisos findById(@PathParam("id") int id) throws EntityNotFoundException;
 	
    // responde a peticiones DELETE
    @DELETE
    // paramentro indicado en la URL
    @Path("{id}")
-   void deletePisos(@PathParam("id") Long id) throws EntityNotFoundException;
+   void deletePisos(@PathParam("id") int id) throws EntityNotFoundException;
 
    // responde a peticiones PUT
    @PUT

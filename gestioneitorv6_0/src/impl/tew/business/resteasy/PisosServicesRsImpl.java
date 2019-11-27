@@ -16,7 +16,7 @@ import impl.tew.business.classes.PisosUpdate;
 public class PisosServicesRsImpl implements PisosServicesRs {
 
 	@Override
-	public List<Pisos> getPisos() {
+	public List<Pisos> Pisos() {
 		try {
 			return new PisosListado().Pisos();
 		} catch (Exception e) {
@@ -42,7 +42,7 @@ public class PisosServicesRsImpl implements PisosServicesRs {
 	}
 
 	@Override
-	public Pisos findById(Long id) throws EntityNotFoundException {
+	public Pisos findById(int id) throws EntityNotFoundException {
 		return new PisosBuscar().find(id);
 	}
 }
