@@ -3,53 +3,49 @@ package impl.tew.persistence;
 import java.sql.*;
 import java.util.*;
 
-import com.tew.model.Alumno;
-import com.tew.persistence.AlumnoDao;
+import com.tew.model.Pisos;
+import com.tew.persistence.PisosDao;
 import com.tew.persistence.exception.*;
 
 
 /**
- * Implementaciï¿½ï¿½n de la interfaz de fachada al servicio de persistencia para
- * Alumnos. En este caso es Jdbc pero podrï¿½ï¿½a ser cualquier otra tecnologia 
- * de persistencia, por ejemplo, la que veremos mï¿½ï¿½s adelante JPA 
- * (mapeador de objetos a relacional)
- * 
- * @author Enrique
- *
+ * @author Alejandro Muñiz Berdasco
+ * @author Pedro Palacio Estrada
+ * @author Alvaro Fernandez Arias
  */
-public class AlumnoJdbcDao implements AlumnoDao {
 
-	public List<Alumno> getAlumnos() {
+public class PisosJdbcDao implements PisosDao {
+
+	public List<Pisos> Pisos() {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Connection con = null;
-		
-		List<Alumno> alumnos = new ArrayList<Alumno>();
+
+		List<Pisos> Pisoss = new ArrayList<Pisos>();
 
 		try {
-			// En una implemenntaciï¿½ï¿½n mï¿½ï¿½s sofisticada estas constantes habrï¿½ï¿½a 
-			// que sacarlas a un sistema de configuraciï¿½ï¿½n: 
-			// xml, properties, descriptores de despliege, etc 
+
 			String SQL_DRV = "org.hsqldb.jdbcDriver";
 			String SQL_URL = "jdbc:hsqldb:hsql://localhost/localDB";
 
-			// Obtenemos la conexiï¿½ï¿½n a la base de datos.
 			Class.forName(SQL_DRV);
 			con = DriverManager.getConnection(SQL_URL, "sa", "");
-			ps = con.prepareStatement("select * from alumno");
+			ps = con.prepareStatement("select * from Piso");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Alumno alumno = new Alumno();
-				alumno.setId(rs.getLong("ID"));
-				alumno.setNombre(rs.getString("NOMBRE"));
-				alumno.setApellidos(rs.getString("APELLIDOS"));
-				alumno.setEmail(rs.getString("EMAIL"));
-				alumno.setIduser(rs.getString("IDUSER"));
+				Pisos Pisos = new Pisos();
+				Pisos.setID(rs.getInt("ID"));
+				Pisos.setPrecio(rs.getDouble("PRECIO"));
+				Pisos.setIDAgente(rs.getInt("IDAGENTE"));
+				Pisos.setDireccion(rs.getString("DIRECCION"));
+				Pisos.setAnio(rs.getInt("ANIO"));
+				Pisos.setEstado(rs.getInt("ESTADO"));
+				Pisos.setCiudad(rs.getString("CIUDAD"));
+				Pisoss.add(Pisos);
 				
-				alumnos.add(alumno);
 			}
-			
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Driver not found", e);
@@ -61,35 +57,48 @@ public class AlumnoJdbcDao implements AlumnoDao {
 			if (ps != null) {try{ ps.close(); } catch (Exception ex){}};
 			if (con != null) {try{ con.close(); } catch (Exception ex){}};
 		}
-		
-		return alumnos;
+
+		return Pisoss;
 	}
 
 	@Override
-	public void delete(Long id) throws NotPersistedException {
+	public void delete(int id) throws NotPersistedException {
 		PreparedStatement ps = null;
 		Connection con = null;
 		int rows = 0;
-		
+
 		try {
-			// En una implementaciï¿½ï¿½n mï¿½ï¿½s sofisticada estas constantes habrï¿½ï¿½a 
-			// que sacarlas a un sistema de configuraciï¿½ï¿½n: 
-			// xml, properties, descriptores de despliege, etc 
+
 			String SQL_DRV = "org.hsqldb.jdbcDriver";
 			String SQL_URL = "jdbc:hsqldb:hsql://localhost/localDB";
 
-			// Obtenemos la conexiï¿½ï¿½n a la base de datos.
 			Class.forName(SQL_DRV);
 			con = DriverManager.getConnection(SQL_URL, "sa", "");
-			ps = con.prepareStatement("delete from alumno where id = ?");
 			
-			ps.setLong(1, id);
+			Pisos p = null;			
+			p = this.findById(id);
+			
+			if(p!=null) {
+								
+				ps = con.prepareStatement("delete from Piso where IDPiso = ?");
+				ps.setInt(1, id);
+
+				rows = ps.executeUpdate();
+				if (rows != 1) {
+					throw new NotPersistedException("Piso " + id + " not found");
+				} 
+			}
+			
+									
+			ps = con.prepareStatement("delete from Piso where ID = ?");
+
+			ps.setInt(1, id);
 
 			rows = ps.executeUpdate();
 			if (rows != 1) {
-				throw new NotPersistedException("Alumno " + id + " not found");
+				throw new NotPersistedException("Piso " + id + " not found");
 			} 
-			
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Driver not found", e);
@@ -104,36 +113,34 @@ public class AlumnoJdbcDao implements AlumnoDao {
 	}
 
 	@Override
-	public Alumno findById(Long id) {
+	public Pisos findById(int id) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Connection con = null;
-		Alumno alumno = null;
-		
+		Pisos Pisos = null;
+
 		try {
-			// En una implementaciï¿½ï¿½n mï¿½ï¿½s sofisticada estas constantes habrï¿½ï¿½a 
-			// que sacarlas a un sistema de configuraciï¿½ï¿½n: 
-			// xml, properties, descriptores de despliege, etc 
+ 
 			String SQL_DRV = "org.hsqldb.jdbcDriver";
 			String SQL_URL = "jdbc:hsqldb:hsql://localhost/localDB";
 
-			// Obtenemos la conexiï¿½ï¿½n a la base de datos.
 			Class.forName(SQL_DRV);
 			con = DriverManager.getConnection(SQL_URL, "sa", "");
-			ps = con.prepareStatement("select * from alumno where id = ?");
+			ps = con.prepareStatement("select * from Piso where id = ?");
 			ps.setLong(1, id);
-			
+
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				alumno = new Alumno();
-				
-				alumno.setId(rs.getLong("ID"));
-				alumno.setNombre(rs.getString("NOMBRE"));
-				alumno.setApellidos(rs.getString("APELLIDOS"));
-				alumno.setEmail(rs.getString("EMAIL"));
-				alumno.setIduser(rs.getString("IDUSER"));
+				Pisos = new Pisos();
+
+				Pisos.setID(rs.getInt("ID"));
+				Pisos.setPrecio(rs.getDouble("PRECIO"));
+				Pisos.setIDAgente(rs.getInt("IDAGENTE"));
+				Pisos.setDireccion(rs.getString("DIRECCION"));
+				Pisos.setAnio(rs.getInt("ANIO"));
+				Pisos.setEstado(rs.getInt("ESTADO"));
 			}
-			
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Driver not found", e);
@@ -146,38 +153,38 @@ public class AlumnoJdbcDao implements AlumnoDao {
 			if (ps != null) {try{ ps.close(); } catch (Exception ex){}};
 			if (con != null) {try{ con.close(); } catch (Exception ex){}};
 		}
-		
-		return alumno;
+
+		return Pisos;
 	}
 
 	@Override
-	public void save(Alumno a) throws AlreadyPersistedException {
+	public void save(Pisos a) throws AlreadyPersistedException {
 		PreparedStatement ps = null;
 		Connection con = null;
 		int rows = 0;
-		
+
 		try {
-			// En una implementaciï¿½ï¿½n mï¿½ï¿½s sofisticada estas constantes habrï¿½ï¿½a 
-			// que sacarlas a un sistema de configuraciï¿½ï¿½n: 
-			// xml, properties, descriptores de despliege, etc 
+
 			String SQL_DRV = "org.hsqldb.jdbcDriver";
 			String SQL_URL = "jdbc:hsqldb:hsql://localhost/localDB";
 
-			// Obtenemos la conexiï¿½ï¿½n a la base de datos.
 			Class.forName(SQL_DRV);
 			con = DriverManager.getConnection(SQL_URL, "sa", "");
 			ps = con.prepareStatement(
-					"insert into alumno (nombre, apellidos, iduser, email) " +
-					"values (?, ?, ?, ?)");
-			
-			ps.setString(1, a.getNombre());
-			ps.setString(2, a.getApellidos());
-			ps.setString(3, a.getIduser());
-			ps.setString(4, a.getEmail());
+					"insert into Piso (IDAgente, precio, direccion,ciudad,anio,estado) " +
+					"values (?, ?, ?, ?, ?, ?)");
 
+			
+			ps.setInt(1, a.getIDAgente());
+			ps.setDouble(2, a.getPrecio());
+			ps.setString(3, a.getDireccion());
+			ps.setString(4, a.getCiudad());
+			ps.setInt(5, a.getAnio());
+			ps.setInt(6, a.getEstado());
+			
 			rows = ps.executeUpdate();
 			if (rows != 1) {
-				throw new AlreadyPersistedException("Alumno " + a + " already persisted");
+				throw new AlreadyPersistedException("Piso " + a + " already persisted");
 			} 
 
 		} catch (ClassNotFoundException e) {
@@ -194,37 +201,38 @@ public class AlumnoJdbcDao implements AlumnoDao {
 	}
 
 	@Override
-	public void update(Alumno a) throws NotPersistedException {
+	public void update(Pisos a) throws NotPersistedException {
 		PreparedStatement ps = null;
 		Connection con = null;
 		int rows = 0;
-		
+
 		try {
-			// En una implementaciï¿½ï¿½n mï¿½ï¿½s sofisticada estas constantes habrï¿½ï¿½a 
-			// que sacarlas a un sistema de configuraciï¿½ï¿½n: 
-			// xml, properties, descriptores de despliege, etc 
+
 			String SQL_DRV = "org.hsqldb.jdbcDriver";
 			String SQL_URL = "jdbc:hsqldb:hsql://localhost/localDB";
 
-			// Obtenemos la conexiï¿½ï¿½n a la base de datos.
 			Class.forName(SQL_DRV);
 			con = DriverManager.getConnection(SQL_URL, "sa", "");
 			ps = con.prepareStatement(
-					"update alumno " +
-					"set nombre = ?, apellidos = ?, iduser = ?, email = ?" +
-					"where id = ?");
-			
-			ps.setString(1, a.getNombre());
-			ps.setString(2, a.getApellidos());
-			ps.setString(3, a.getIduser());
-			ps.setString(4, a.getEmail());
-			ps.setLong(5, a.getId());
+					"update Piso " +
+							"set ID = ?, IDAgente = ?, precio = ?, direccion = ?, ciudad = ?, anio = ?, estado = ?" +
+					"where ID = ?");
+
+			ps.setInt(1, a.getID());
+			ps.setInt(2, a.getIDAgente());
+			ps.setDouble(3, a.getPrecio());
+			ps.setString(4, a.getDireccion());
+			ps.setString(5, a.getCiudad());
+			ps.setInt(6, a.getAnio());
+			ps.setInt(7, a.getEstado());
+			ps.setInt(8, a.getID());
+
 
 			rows = ps.executeUpdate();
 			if (rows != 1) {
-				throw new NotPersistedException("Alumno " + a + " not found");
+				throw new NotPersistedException("Piso " + a + " not found");
 			} 
-			
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Driver not found", e);
@@ -237,5 +245,5 @@ public class AlumnoJdbcDao implements AlumnoDao {
 			if (con != null) {try{ con.close(); } catch (Exception ex){}};
 		}
 	}
-
+	
 }

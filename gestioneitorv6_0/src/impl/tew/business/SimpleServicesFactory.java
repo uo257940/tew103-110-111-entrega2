@@ -1,22 +1,29 @@
 package impl.tew.business;
 
 
-import com.tew.business.AlumnosService;
-import com.tew.business.LoginService;
+import com.tew.business.AgentesService;
+import com.tew.business.PisosService;
 import com.tew.business.ServicesFactory;
+
+/**
+ * @author Alejandro Muñiz Berdasco
+ * @author Pedro Palacio Estrada
+ * @author Alvaro Fernandez Arias
+ */
 
 public class SimpleServicesFactory implements ServicesFactory {
 
+	
 	@Override
-	public AlumnosService createAlumnosService() {
-		return new SimpleAlumnosService();
+	public PisosService createPisosService() {
+		return new SimplePisosService();
 	}
 
 	@Override
-	public LoginService createLoginService() {
-		// TODO Auto-generated method stub
+	public AgentesService createAgentesService() {
 		
-		return new SimpleLoginService();	
+		return new SimpleAgentesService();
 	}
 
+	
 }

@@ -1,19 +1,14 @@
 package com.tew.persistence;
 
-import com.tew.persistence.AlumnoDao;
 
 /**
- * Interfaz de la factoria que suministra implementaciones reales de la fachada 
- * de persistencia para cada Entidad del Modelo (en este caso solo hay 
- * una: Alumno; pero en futuras versiones habrï¿½ï¿½ mï¿½ï¿½s)
- *  
- * @author alb
- *
+ * @author Alejandro Muñiz Berdasco
+ * @author Pedro Palacio Estrada
+ * @author Alvaro Fernandez Arias
  */
+
 public interface PersistenceFactory {
-	
-	AlumnoDao createAlumnoDao();
-	
-	// ... otros mï¿½ï¿½todos factoria para Daos de otras entidades del modelo ...
+	PisosDao createPisosDao();
+	AgenteDao createAgenteDao();
 }
 

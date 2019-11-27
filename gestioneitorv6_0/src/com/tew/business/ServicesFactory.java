@@ -1,9 +1,14 @@
 package com.tew.business;
 
+/**
+ * @author Alejandro Muñiz Berdasco
+ * @author Pedro Palacio Estrada
+ * @author Alvaro Fernandez Arias
+ */
+
 public interface ServicesFactory {
 	
-	AlumnosService createAlumnosService();
-
-	LoginService createLoginService();
+	PisosService	createPisosService();
+	AgentesService createAgentesService();
 
 }
