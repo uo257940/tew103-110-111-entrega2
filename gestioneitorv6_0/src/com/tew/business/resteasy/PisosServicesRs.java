@@ -18,8 +18,6 @@ public interface PisosServicesRs extends PisosService{
    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
    public List<Pisos> Pisos();
    
-	
-   
    @GET
    // paramentro indicado en la URL, utilizado el método con @PathParam
    @Path("{id}")
@@ -29,7 +27,6 @@ public interface PisosServicesRs extends PisosService{
 	
    // responde a peticiones DELETE
    @DELETE
-   // paramentro indicado en la URL
    @Path("{id}")
    void deletePisos(@PathParam("id") int id) throws EntityNotFoundException;
 

@@ -22,9 +22,7 @@ public class PisosJdbcDao implements PisosDao {
 		Connection con = null;
 
 		List<Pisos> Pisoss = new ArrayList<Pisos>();
-
 		try {
-
 			String SQL_DRV = "org.hsqldb.jdbcDriver";
 			String SQL_URL = "jdbc:hsqldb:hsql://localhost/localDB";
 
@@ -32,6 +30,7 @@ public class PisosJdbcDao implements PisosDao {
 			con = DriverManager.getConnection(SQL_URL, "sa", "");
 			ps = con.prepareStatement("select * from Piso");
 			rs = ps.executeQuery();
+			System.out.print("----------------------------------");
 
 			while (rs.next()) {
 				Pisos Pisos = new Pisos();
@@ -43,7 +42,6 @@ public class PisosJdbcDao implements PisosDao {
 				Pisos.setEstado(rs.getInt("ESTADO"));
 				Pisos.setCiudad(rs.getString("CIUDAD"));
 				Pisoss.add(Pisos);
-				
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -61,6 +59,7 @@ public class PisosJdbcDao implements PisosDao {
 		return Pisoss;
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public void delete(int id) throws NotPersistedException {
 		PreparedStatement ps = null;
@@ -77,27 +76,15 @@ public class PisosJdbcDao implements PisosDao {
 			
 			Pisos p = null;			
 			p = this.findById(id);
-			
-			if(p!=null) {
+			System.out.println(p.getID()+"-------------------------------------");
 								
-				ps = con.prepareStatement("delete from Piso where IDPiso = ?");
+				ps = con.prepareStatement("delete from Piso where ID = ?");
 				ps.setInt(1, id);
 
 				rows = ps.executeUpdate();
 				if (rows != 1) {
 					throw new NotPersistedException("Piso " + id + " not found");
 				} 
-			}
-			
-									
-			ps = con.prepareStatement("delete from Piso where ID = ?");
-
-			ps.setInt(1, id);
-
-			rows = ps.executeUpdate();
-			if (rows != 1) {
-				throw new NotPersistedException("Piso " + id + " not found");
-			} 
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

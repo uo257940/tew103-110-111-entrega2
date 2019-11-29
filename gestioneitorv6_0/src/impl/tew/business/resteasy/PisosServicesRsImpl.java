@@ -18,7 +18,7 @@ public class PisosServicesRsImpl implements PisosServicesRs {
 	@Override
 	public List<Pisos> Pisos() {
 		try {
-			return new PisosListado().Pisos();
+			return new  PisosListado().Pisos();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
