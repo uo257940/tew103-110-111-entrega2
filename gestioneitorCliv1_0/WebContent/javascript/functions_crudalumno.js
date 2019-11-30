@@ -50,6 +50,7 @@ function Model(){
 
 function View(){
 	this.list = function (lista) {} // PENDIENTE DE IMPLEMENTAR
+	this.listapublica = function (lista){}
 	this.loadPisosFromForm = function () {} // PENDIENTE DE IMPLEMENTAR
 	this.loadPisosInForm = function (pisos) {} // PENDIENTE DE IMPLEMENTAR
 	this.getIdPisos = function(celda) {} // PENDIENTE DE IMPLEMENTAR
@@ -68,6 +69,21 @@ function View(){
 			$("#tblList tbody").append("<tr> <td>"
 					+ "<img src='icons/edit.png' class='btnEdit'/>"
 					+ "<img src='icons/delete.png' class='btnDelete'/> </td>"
+					+ "<td>" + pisos.ID + "</td>" + "<td>" + pisos.IDAgente + "</td>"
+					+ "<td>" + pisos.direccion + "</td>" + "<td>" + pisos.precio + "</td>"
+					+ "<td>" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
+		}
+	}
+	
+	this.listapublica = function(lista) {
+		$("#tblListpublica").html("");
+		$("#tblListpublica").html( "<thead>" + "<tr>" + "<th></th>"
+				+ "<th>ID</th>" + "<th>IDAgente</th>" + "<th>direccion</th>"
+				+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>" + "</tr>"
+				+ "</thead>" + "<tbody>" + "</tbody>");
+		for ( var i in lista) {
+			var pisos = lista[i];
+			$("#tblListpublica tbody").append("<tr> <td>"
 					+ "<td>" + pisos.ID + "</td>" + "<td>" + pisos.IDAgente + "</td>"
 					+ "<td>" + pisos.direccion + "</td>" + "<td>" + pisos.precio + "</td>"
 					+ "<td>" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
@@ -124,11 +140,11 @@ function Controller(varmodel, varview) {
 	this.view = varview;
 	// Funcion de inicialización para cargar modelo y vista, definición de manejadores
 	this.init = function() {
-		console.log("hola");
 		// Cargamos la lista de Pisos del servicio
 		this.model.load();
 		// Repintamos la lista de Pisos.
 		this.view.list(this.model.tbpisos);
+		this.view.listapublica(this.model.tbpisos)
 		// MANEJADORES DE EVENTOS
 	}
 
