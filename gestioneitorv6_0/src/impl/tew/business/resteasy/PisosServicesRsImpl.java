@@ -25,7 +25,6 @@ public class PisosServicesRsImpl implements PisosServicesRs {
 			return null;
 		}
 	}
-
 	@Override
 	public void savePisos(Pisos Pisos) throws EntityAlreadyExistsException {
 		new PisosAlta().save(Pisos);

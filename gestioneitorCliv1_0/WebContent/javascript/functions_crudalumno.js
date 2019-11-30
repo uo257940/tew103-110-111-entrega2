@@ -45,7 +45,6 @@ function Model(){
 		var pisos = this.tbpisos.find(checkPisos);
 		return pisos;
 	} 
-
 };
 
 function View(){
