@@ -210,4 +210,54 @@ public class AgenteJdbcDao implements AgenteDao {
 			if (con != null) {try{ con.close(); } catch (Exception ex){}};
 		}
 	}
+
+	@Override
+	public boolean agenteCorrecto(String us, String pass) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = null;
+		boolean res=false;	
+		Agente Agente = null;
+
+		try {
+			
+
+			String SQL_DRV = "org.hsqldb.jdbcDriver";
+			String SQL_URL = "jdbc:hsqldb:hsql://localhost/localDB";
+
+			Class.forName(SQL_DRV);
+			con = DriverManager.getConnection(SQL_URL, "sa", "");
+			ps = con.prepareStatement("select * from Agente where (LOGIN = ? and PASSWD = ?)");
+			ps.setString(1, us);
+			ps.setString(2, pass);
+
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				Agente = new Agente();
+				Agente.setID(rs.getInt("ID"));
+				Agente.setLogin(rs.getString("LOGIN"));
+				Agente.setPasswd(rs.getString("PASSWD"));
+				
+				res=true;
+			}
+			else {
+				res=false;
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new PersistenceException("Driver not found", e);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new PersistenceException("Invalid SQL or database schema", e);
+		}
+		finally  {
+			if (rs != null) {try{ rs.close(); } catch (Exception ex){}};
+			if (ps != null) {try{ ps.close(); } catch (Exception ex){}};
+			if (con != null) {try{ con.close(); } catch (Exception ex){}};
+		}
+
+		
+		return res;
+	}
 }

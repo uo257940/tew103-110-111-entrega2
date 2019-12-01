@@ -45,6 +45,26 @@ function Model(){
 		var pisos = this.tbpisos.find(checkPisos);
 		return pisos;
 	} 
+	
+	
+	
+	
+	//Comprobamos si el agente esta en la BD
+	this.login = function(usa,contr){
+		var corr=AgentesServicesRs.AgenteCorrec({
+			us : usa,
+			pass : contr
+		});
+		if(corr==false){
+			alert("Usuario y contraseña incorrectos");
+		}
+		else{
+			location.href="menu.html";
+		}
+	}
+	
+	
+	
 };
 
 function View(){
@@ -125,6 +145,11 @@ function View(){
 		var id_pisos = parseInt(celda.closest('tr').find('td').get(1).innerHTML);
 		return id_pisos;
 	}
+	
+	
+	
+
+	
 };
 
 
@@ -196,6 +221,26 @@ function Controller(varmodel, varview) {
 		that.view.list(that.model.tbPisos);
 		alert("Eliminado Usuario");
 	});
+	
+	
+	
+	//Login.html al puslar el boton de registrarse
+	$("#login").bind("submit",
+			function(event) {
+		var login=$("#usernamelogin").val();
+		var pass=$("#passwdlogin").val();
+		var usuariocorrecto = that.model.login(login,pass);
+		
+		
+		
+	});
+	
+	
+	
+	
+	
+	
+	
 };
 
 $(function() {

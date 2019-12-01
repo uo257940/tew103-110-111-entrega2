@@ -2,6 +2,8 @@ package com.tew.business;
 
 import java.util.List;
 
+import javax.ws.rs.PathParam;
+
 import com.tew.business.exception.EntityAlreadyExistsException;
 import com.tew.business.exception.EntityNotFoundException;
 import com.tew.model.Agente;
@@ -19,5 +21,6 @@ public interface AgentesService {
 	void saveAgente(Agente agente) throws EntityAlreadyExistsException;
 	void updateAgente(Agente agente) throws EntityNotFoundException;
 	void deleteAgente(int id) throws EntityNotFoundException;
+	boolean AgenteCorrec(String us, String pass ) throws EntityNotFoundException, Exception;
 
 }

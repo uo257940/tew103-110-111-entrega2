@@ -42,4 +42,10 @@ public class SimpleAgentesService implements AgentesService {
 	public Agente findById(int id) throws EntityNotFoundException {
 		return new AgenteBuscar().find(id);
 	}
+
+	@Override
+	public boolean AgenteCorrec(String us, String pass) throws Exception  {
+		
+		return true;
+	}
 }
