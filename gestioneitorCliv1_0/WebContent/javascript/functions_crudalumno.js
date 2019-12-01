@@ -2,6 +2,10 @@ function Model(){
 //	Lista de pisos.
 	this.tbpisos = null;
 
+// 	ID del agente
+	this.idAgente=0;
+	
+	
 //	Carga los datos del servicio sobreescribiendo el dato this.tbpisos.
 	this.load = function() {
 		this.tbpisos = PisosServicesRs.Pisos();
@@ -51,14 +55,15 @@ function Model(){
 	
 	//Comprobamos si el agente esta en la BD
 	this.login = function(usa,contr){
-		var corr=AgentesServicesRs.AgenteCorrec({
+		idAgente=AgentesServicesRs.AgenteCorrec({
 			us : usa,
 			pass : contr
 		});
-		if(corr==false){
+		if(idAgente==-1){
 			alert("Usuario y contraseña incorrectos");
 		}
 		else{
+			
 			location.href="menu.html";
 		}
 	}
@@ -147,6 +152,21 @@ function View(){
 	}
 	
 	
+	
+	this.listaprivada = function(listaPrivada) {
+		$("#tblListprivada").html("");
+		$("#tblListprivada").html( "<thead>" + "<tr>" + "<th></th>"
+				+ "<th>ID</th>" + "<th>IDAgente</th>" + "<th>direccion</th>"
+				+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>" + "</tr>"
+				+ "</thead>" + "<tbody>" + "</tbody>");
+		for ( var i in listaPrivada) {
+			var pisos = listaPrivada[i];
+			$("#tblListprivada tbody").append("<tr> <td>"
+					+ "<td>" + pisos.ID + "</td>" + "<td>" + pisos.IDAgente + "</td>"
+					+ "<td>" + pisos.direccion + "</td>" + "<td>" + pisos.precio + "</td>"
+					+ "<td>" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
+		}
+	}
 	
 
 	

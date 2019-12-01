@@ -212,11 +212,11 @@ public class AgenteJdbcDao implements AgenteDao {
 	}
 
 	@Override
-	public boolean agenteCorrecto(String us, String pass) {
+	public int agenteCorrecto(String us, String pass) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Connection con = null;
-		boolean res=false;	
+		int id=0;	
 		Agente Agente = null;
 
 		try {
@@ -238,10 +238,10 @@ public class AgenteJdbcDao implements AgenteDao {
 				Agente.setLogin(rs.getString("LOGIN"));
 				Agente.setPasswd(rs.getString("PASSWD"));
 				
-				res=true;
+				id=rs.getInt("ID");
 			}
 			else {
-				res=false;
+				id=-1;
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -258,6 +258,8 @@ public class AgenteJdbcDao implements AgenteDao {
 		}
 
 		
-		return res;
+		return id;
 	}
+
+	
 }

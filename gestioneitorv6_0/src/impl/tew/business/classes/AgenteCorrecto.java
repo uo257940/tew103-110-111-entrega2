@@ -14,7 +14,7 @@ import com.tew.persistence.exception.AlreadyPersistedException;
 
 public class AgenteCorrecto {
 
-	public boolean agenteCorrecto(String us, String pass) throws Exception {
+	public int agenteCorrecto(String us, String pass) throws Exception {
 		AgenteDao dao = Factories.persistence.createAgenteDao();
 		try {
 			return dao.agenteCorrecto(us,pass);

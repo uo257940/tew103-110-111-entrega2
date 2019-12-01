@@ -21,7 +21,8 @@ public interface AgentesServicesRs extends AgentesService{
    @Path("{us}/{pass}")
    // formato en el que los datos se retornan en el método
    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-   boolean AgenteCorrec(@PathParam("us") String us, @PathParam("pass") String pass ) throws EntityNotFoundException, Exception;
-	
+   int AgenteCorrec(@PathParam("us") String us, @PathParam("pass") String pass ) throws EntityNotFoundException, Exception;
+
+   
    
 }	

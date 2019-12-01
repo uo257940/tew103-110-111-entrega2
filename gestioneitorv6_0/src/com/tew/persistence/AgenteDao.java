@@ -19,6 +19,7 @@ public interface AgenteDao {
 	void update(Agente a) throws NotPersistedException;
 	void delete(int id) throws NotPersistedException;
 	Agente findById(int id);
-	boolean agenteCorrecto(String us, String pass);
+	int agenteCorrecto(String us, String pass);
+	
 
 }

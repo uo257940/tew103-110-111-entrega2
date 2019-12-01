@@ -44,8 +44,8 @@ public class SimpleAgentesService implements AgentesService {
 	}
 
 	@Override
-	public boolean AgenteCorrec(String us, String pass) throws Exception  {
+	public int AgenteCorrec(String us, String pass) throws Exception  {
 		
-		return true;
+		return 0;
 	}
 }

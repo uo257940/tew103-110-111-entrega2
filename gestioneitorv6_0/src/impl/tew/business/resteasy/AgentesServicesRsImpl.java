@@ -7,28 +7,26 @@ import com.tew.business.exception.EntityNotFoundException;
 import com.tew.business.resteasy.AgentesServicesRs;
 import com.tew.model.Agente;
 
-import impl.tew.business.classes.AgenteAlta;
-import impl.tew.business.classes.AgenteBaja;
-import impl.tew.business.classes.AgenteBuscar;
-import impl.tew.business.classes.AgenteListado;
-import impl.tew.business.classes.AgenteUpdate;
+
 import impl.tew.business.classes.AgenteCorrecto;
+
 
 public class AgentesServicesRsImpl implements AgentesServicesRs {
 
 
 	
 	@Override
-	public boolean AgenteCorrec(String us, String pass) throws Exception {
+	public int AgenteCorrec(String us, String pass) throws Exception {
 		try {
 			
 		return new AgenteCorrecto().agenteCorrecto(us,pass);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-		return false;
+		return 0;
 	}
 	}
+
 	
 	
 	
@@ -62,6 +60,11 @@ public class AgentesServicesRsImpl implements AgentesServicesRs {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+
+
 
 	
 }

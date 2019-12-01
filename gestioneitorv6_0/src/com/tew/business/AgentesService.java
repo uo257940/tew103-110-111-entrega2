@@ -21,6 +21,6 @@ public interface AgentesService {
 	void saveAgente(Agente agente) throws EntityAlreadyExistsException;
 	void updateAgente(Agente agente) throws EntityNotFoundException;
 	void deleteAgente(int id) throws EntityNotFoundException;
-	boolean AgenteCorrec(String us, String pass ) throws EntityNotFoundException, Exception;
+	int AgenteCorrec(String us, String pass ) throws EntityNotFoundException, Exception;
 
 }
