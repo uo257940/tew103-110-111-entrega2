@@ -18,5 +18,6 @@ public interface PisosDao {
 	void save(Pisos a) throws AlreadyPersistedException;
 	void update(Pisos a) throws NotPersistedException;
 	void delete(int id) throws NotPersistedException;
+	byte[] imagen(String path) throws NotPersistedException;
 	Pisos findById(int id);
 }

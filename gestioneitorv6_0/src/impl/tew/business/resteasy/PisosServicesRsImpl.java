@@ -1,6 +1,12 @@
 package impl.tew.business.resteasy;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import com.tew.business.exception.EntityAlreadyExistsException;
 import com.tew.business.exception.EntityNotFoundException;
@@ -45,4 +51,5 @@ public class PisosServicesRsImpl implements PisosServicesRs {
 	public Pisos findById(int id) throws EntityNotFoundException {
 		return new PisosBuscar().find(id);
 	}
+	
 }

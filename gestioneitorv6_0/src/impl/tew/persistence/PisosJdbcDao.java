@@ -41,6 +41,7 @@ public class PisosJdbcDao implements PisosDao {
 				Pisos.setAnio(rs.getInt("ANIO"));
 				Pisos.setEstado(rs.getInt("ESTADO"));
 				Pisos.setCiudad(rs.getString("CIUDAD"));
+				Pisos.setImagen(rs.getString("IMAGEN"));
 				Pisoss.add(Pisos);
 			}
 
@@ -126,6 +127,7 @@ public class PisosJdbcDao implements PisosDao {
 				Pisos.setDireccion(rs.getString("DIRECCION"));
 				Pisos.setAnio(rs.getInt("ANIO"));
 				Pisos.setEstado(rs.getInt("ESTADO"));
+				Pisos.setImagen(rs.getString("IMAGEN"));
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -158,17 +160,16 @@ public class PisosJdbcDao implements PisosDao {
 			Class.forName(SQL_DRV);
 			con = DriverManager.getConnection(SQL_URL, "sa", "");
 			ps = con.prepareStatement(
-					"insert into Piso (IDAgente, precio, direccion,ciudad,anio,estado) " +
-					"values (?, ?, ?, ?, ?, ?)");
-
-			
+					"insert into Piso (IDAgente, precio, direccion,ciudad,anio,estado,imagen) " +
+					"values (?, ?, ?, ?, ?, ?,?)");
 			ps.setInt(1, a.getIDAgente());
 			ps.setDouble(2, a.getPrecio());
 			ps.setString(3, a.getDireccion());
 			ps.setString(4, a.getCiudad());
 			ps.setInt(5, a.getAnio());
 			ps.setInt(6, a.getEstado());
-			
+			ps.setString(7, a.getImagen());
+
 			rows = ps.executeUpdate();
 			if (rows != 1) {
 				throw new AlreadyPersistedException("Piso " + a + " already persisted");
@@ -202,7 +203,7 @@ public class PisosJdbcDao implements PisosDao {
 			con = DriverManager.getConnection(SQL_URL, "sa", "");
 			ps = con.prepareStatement(
 					"update Piso " +
-							"set ID = ?, IDAgente = ?, precio = ?, direccion = ?, ciudad = ?, anio = ?, estado = ?" +
+							"set ID = ?, IDAgente = ?, precio = ?, direccion = ?, ciudad = ?, anio = ?, estado = ?, imagen = ?" +
 					"where ID = ?");
 
 			ps.setInt(1, a.getID());
@@ -212,7 +213,8 @@ public class PisosJdbcDao implements PisosDao {
 			ps.setString(5, a.getCiudad());
 			ps.setInt(6, a.getAnio());
 			ps.setInt(7, a.getEstado());
-			ps.setInt(8, a.getID());
+			ps.setString(8,a.getImagen());
+			ps.setInt(9, a.getID());
 
 
 			rows = ps.executeUpdate();

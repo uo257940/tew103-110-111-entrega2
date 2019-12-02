@@ -21,7 +21,8 @@ Universidad de Oviedo
 <script type="text/javascript"
 	src="http://localhost:8080/gestioneitorv6_0/rest-jsapi"></script>
 <script type="text/javascript" src="javascript/functions_crudalumno.js"></script>
-<script type="text/javascript" src="bootstrap/js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript"
+	src="bootstrap/js/jquery.tablesorter.min.js"></script>
 
 </head>
 <body style="background-color: #E3CAA1">
@@ -30,10 +31,14 @@ Universidad de Oviedo
 			<h3>Listado De Pisos:</h3>
 		</article>
 		<article class="table-responsive">
-		<p>introduce un texto a buscar</p>
-		<input name="filtro" id="filtro" type="text" placeholder="Search..">
-			<table class="table table-striped table-responsive tablesorter" id="tblListpublica">
+			<p>introduce un texto a buscar</p>
+			<input name="filtro" id="filtro" type="text" placeholder="Search..">
+			<table class="table table-striped table-responsive tablesorter"
+				id="tblListpublica">
 			</table>
+			<div style="position: relative;">
+				<canvas id="ventana" width="400" height="400"></canvas>
+			</div>
 		</article>
 	</section>
 </body>

@@ -18,6 +18,7 @@ public class Pisos {
 	private String ciudad;
 	private int anio;
 	private int estado;
+	private String imagen;
 		
 	public Pisos (int id,int IDAgente, double precio, String direccion, String ciudad, int anio,int estado) {
 		  this.ID = id; this.IDAgente = IDAgente; this.precio = precio;
@@ -82,6 +83,16 @@ public class Pisos {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
+	
+	@XmlElement
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	
+	
 	
 	
 

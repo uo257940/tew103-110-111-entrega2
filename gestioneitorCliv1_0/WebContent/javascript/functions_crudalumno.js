@@ -29,6 +29,9 @@ function Model(){
 		this.load();
 
 	}
+	
+	
+	
 //	Eliminación un pisos exist	ente
 	this.remove = function(id_pisos) {
 		PisosServicesRs.deletePisos({
@@ -66,7 +69,13 @@ function Model(){
 		}
 	}
 	
-	
+	$("article").on('mouseover','#tblListpublica tr' , function(){
+		path=$('#tblListapublica  td:eq(8)')
+		 var path = document.getElementById("mapview");
+         var ctx = path.getContext("2d");
+		ventanaa.src="http://localhost:8080/gestioneitorv6_0"+path;	
+		ctx.drawImage(ventanaa,0,0,ventanaa.width,ventanaa.height,0,0,400,400);
+	});
 	
 };
 
@@ -77,12 +86,11 @@ function View(){
 	this.loadPisosInForm = function (pisos) {} // PENDIENTE DE IMPLEMENTAR
 	this.getIdPisos = function(celda) {} // PENDIENTE DE IMPLEMENTAR
 
-
 	this.list = function(lista) {
 		$("#tblList").html("");
 		$("#tblList").html( "<thead>" + "<tr>" + "<th></th>"
 				+ "<th>ID</th>" + "<th>IDAgente</th>" + "<th>direccion</th>"
-				+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>" + "</tr>"
+				+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>"+"<th>imagen</th>" + "</tr>"
 				+ "</thead>" + "<tbody>" + "</tbody>");
 		for ( var i in lista) {
 			var pisos = lista[i];
@@ -91,7 +99,8 @@ function View(){
 					+ "<img src='icons/delete.png' class='btnDelete'/> </td>"
 					+ "<td>" + pisos.ID + "</td>" + "<td>" + pisos.IDAgente + "</td>"
 					+ "<td>" + pisos.direccion + "</td>" + "<td>" + pisos.precio + "</td>"
-					+ "<td>" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
+					+ "<td>" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado+"</td>"+"<td>"+pisos.imagen+ "</td></tr>");
+		
 		}
 		
 	}
@@ -100,7 +109,7 @@ function View(){
 		$("#tblListpublica").html("");
 		$("#tblListpublica").html( "<thead>" + "<tr>" + "<th></th>"
 				+ "<th class=\"ID\">ID</th>" + "<th class=\"IDAgente\">IDAgente</th>" + "<th class=\"direccion\">direccion</th>"
-				+ "<th class=\"precio\">precio</th>" + "<th class=\"ciudad\">ciudad</th>"+"<th class=\"anio\">anio</th>"+"<th class=\"estado\">estado</th>" + "</tr>"
+				+ "<th class=\"precio\">precio</th>" + "<th class=\"ciudad\">ciudad</th>"+"<th class=\"anio\">anio</th>"+"<th class=\"estado\">estado</th>"+ "<th class=\"imagen\">imagen</th>" + "</tr>"
 				+ "</thead>" + "<tbody id=\"busqueda\" >" + "</tbody>");
 		for ( var i in lista) {
 			var pisos = lista[i];
@@ -109,7 +118,7 @@ function View(){
 					+ "<td>" + pisos.direccion + "</td>" + "<td>" + pisos.precio + "</td>"
 					+ "<td class=\"ciudad\">"+ pisos.ciudad +"</td>"
 					+ "<td>" + pisos.anio + "</td>"
-					+ "<td>" +pisos.estado + "</td>"+"</td></tr>");
+					+ "<td>" +pisos.estado + "</td>"+"<td> "+pisos.imagen + "</td>"+"</td></tr>");
 		}
 		 $("table").tablesorter({
 			    theme : 'blue',
@@ -117,7 +126,7 @@ function View(){
 			    headers: {
 			      // disable sorting of the first & second column - before we would have to had made two entries
 			      // note that "first-name" is a class on the span INSIDE the first column th cell
-			      '.ID, .IDAgente, .direccion, .ciudad, .anio, .estado' : {
+			      '.ID, .IDAgente, .direccion, .ciudad, .anio, .estado, .imagen' : {
 			        // disable it by setting the property sorter to false
 			        sorter: false
 			      }
@@ -134,7 +143,9 @@ function View(){
 				precio : $("#precio").val(),
 				ciudad : $("#ciudad").val(),
 				anio : $("#anio").val(),
-				estado : $("#estado").val()
+				estado : $("#estado").val(),
+				imagen : $("#imagen").val()
+
 		};
 		return pisos;
 	}
@@ -148,6 +159,7 @@ function View(){
 		$("#ciudad").val(pisos.ciudad);
 		$("#anio").val(pisos.anio);
 		$("#estado").val(pisos.estado);
+		$("#imagen").val(pisos.imagen);
 		$("#ID").focus(); // Ponemos el foco en el campo Nombre.
 	}
 
@@ -167,14 +179,14 @@ function View(){
 		$("#tblListprivada").html("");
 		$("#tblListprivada").html( "<thead>" + "<tr>" + "<th></th>"
 				+ "<th>ID</th>" + "<th>IDAgente</th>" + "<th>direccion</th>"
-				+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>" + "</tr>"
+				+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>" +"<th>imagen</th>"+"</tr>"
 				+ "</thead>" + "<tbody>" + "</tbody>");
 		for ( var i in listaPrivada) {
 			var pisos = listaPrivada[i];
 			$("#tblListprivada tbody").append("<tr> <td>"
 					+ "<td>" + pisos.ID + "</td>" + "<td>" + pisos.IDAgente + "</td>"
 					+ "<td>" + pisos.direccion + "</td>" + "<td>" + pisos.precio + "</td>"
-					+ "<td class=\"ciudad\">" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
+					+ "<td class=\"ciudad\">" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado+"</td>" +"</td></tr>");
 		}
 	}	
 };
@@ -266,8 +278,6 @@ function Controller(varmodel, varview) {
 	        $("#tblListpublica td.ciudad:not(:contains('" + $(this).val() + "'))").parent().hide();
 	    });
 	 
-	 
-
 };
 
 
