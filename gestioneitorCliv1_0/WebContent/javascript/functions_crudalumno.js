@@ -70,9 +70,9 @@ function Model(){
 	}
 	
 	$("article").on('mouseover','#tblListpublica tr' , function(){
-		path=$('#tblListapublica  td:eq(8)')
-		 var path = document.getElementById("mapview");
-         var ctx = path.getContext("2d");
+		 path=$('#tblListapublica  td:eq(8)')
+		 var canvas = document.getElementById("ventana");
+         var ctx = canvas.getContext("2d");
 		ventanaa.src="http://localhost:8080/gestioneitorv6_0"+path;	
 		ctx.drawImage(ventanaa,0,0,ventanaa.width,ventanaa.height,0,0,400,400);
 	});
