@@ -18,12 +18,6 @@ public interface PisosServicesRs extends PisosService{
    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
    public List<Pisos> Pisos();
    
-   @GET
-   // paramentro indicado en la URL, utilizado el método con @PathParam
-   @Path("{id}")
-   // formato en el que los datos se retornan en el método
-   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-   Pisos findById(@PathParam("id") int id) throws EntityNotFoundException;
 	
    // responde a peticiones DELETE
    @DELETE
@@ -40,4 +34,11 @@ public interface PisosServicesRs extends PisosService{
    // formato en que los datos se reciben en el método
    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
    void updatePisos(Pisos Pisos) throws EntityNotFoundException;
+   
+   @GET
+   @Path("{id}")
+   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+   public List<Pisos>  PisosDeAgente(@PathParam("id") int id);
+  
+   
 }	

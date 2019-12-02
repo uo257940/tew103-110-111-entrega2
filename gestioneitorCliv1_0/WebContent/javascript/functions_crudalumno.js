@@ -2,6 +2,7 @@ function Model(){
 //	Lista de pisos.
 	this.tbpisos = null;
 
+	this.tbpisosAgente=null;
 // 	ID del agente
 	this.idAgente=0;
 	
@@ -63,8 +64,11 @@ function Model(){
 			alert("Usuario y contraseña incorrectos");
 		}
 		else{
+
+			this.tbpisosAgente = PisosServicesRs.PisosDeAgente({
+					id : idAgente});
 			
-			location.href="menu.html";
+			//location.href="menu.html";
 		}
 	}
 	
@@ -78,6 +82,7 @@ function View(){
 	this.loadPisosFromForm = function () {} // PENDIENTE DE IMPLEMENTAR
 	this.loadPisosInForm = function (pisos) {} // PENDIENTE DE IMPLEMENTAR
 	this.getIdPisos = function(celda) {} // PENDIENTE DE IMPLEMENTAR
+	this.listaprivada = function(lista){}
 
 
 	this.list = function(lista) {
@@ -153,20 +158,22 @@ function View(){
 	
 	
 	
-	this.listaprivada = function(listaPrivada) {
-		$("#tblListprivada").html("");
-		$("#tblListprivada").html( "<thead>" + "<tr>" + "<th></th>"
-				+ "<th>ID</th>" + "<th>IDAgente</th>" + "<th>direccion</th>"
-				+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>" + "</tr>"
-				+ "</thead>" + "<tbody>" + "</tbody>");
-		for ( var i in listaPrivada) {
-			var pisos = listaPrivada[i];
-			$("#tblListprivada tbody").append("<tr> <td>"
-					+ "<td>" + pisos.ID + "</td>" + "<td>" + pisos.IDAgente + "</td>"
-					+ "<td>" + pisos.direccion + "</td>" + "<td>" + pisos.precio + "</td>"
-					+ "<td>" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
+	this.listaprivada = function(lista) {
+			$("#tblListprivada").html("");
+			$("#tblListprivada").html( "<thead>" + "<tr>" + "<th></th>"
+					+ "<th>ID</th>" + "<th>IDAgente</th>" + "<th>direccion</th>"
+					+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>" + "</tr>"
+					+ "</thead>" + "<tbody>" + "</tbody>");
+			for ( var i in lista) {
+				var pisos = lista[i];
+				$("#tblListprivada tbody").append("<tr> <td>"
+						+ "<img src='icons/edit.png' class='btnEdit'/>"
+						+ "<img src='icons/delete.png' class='btnDelete'/> </td>"
+						+ "<td>" + pisos.ID + "</td>" + "<td>" + pisos.IDAgente + "</td>"
+						+ "<td>" + pisos.direccion + "</td>" + "<td>" + pisos.precio + "</td>"
+						+ "<td>" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
+			}
 		}
-	}
 	
 
 	
@@ -250,14 +257,12 @@ function Controller(varmodel, varview) {
 		var login=$("#usernamelogin").val();
 		var pass=$("#passwdlogin").val();
 		var usuariocorrecto = that.model.login(login,pass);
-		
-		
-		
+		that.view.listaprivada(that.model.tbpisosAgente);
 	});
 	
-	
-	
-	
+
+		
+		
 	
 	
 	

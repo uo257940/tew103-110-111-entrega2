@@ -11,6 +11,7 @@ import impl.tew.business.classes.PisosAlta;
 import impl.tew.business.classes.PisosBaja;
 import impl.tew.business.classes.PisosBuscar;
 import impl.tew.business.classes.PisosListado;
+import impl.tew.business.classes.PisosListadoAgente;
 import impl.tew.business.classes.PisosUpdate;
 
 public class PisosServicesRsImpl implements PisosServicesRs {
@@ -26,6 +27,20 @@ public class PisosServicesRsImpl implements PisosServicesRs {
 			return null;
 		}
 	}
+	
+	
+	@Override
+	public List<Pisos> PisosDeAgente(int id) {
+		try {
+			return new PisosListadoAgente().PisosAgente(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 	@Override
 	public void savePisos(Pisos Pisos) throws EntityAlreadyExistsException {
 		new PisosAlta().save(Pisos);
@@ -45,4 +60,5 @@ public class PisosServicesRsImpl implements PisosServicesRs {
 	public Pisos findById(int id) throws EntityNotFoundException {
 		return new PisosBuscar().find(id);
 	}
+
 }

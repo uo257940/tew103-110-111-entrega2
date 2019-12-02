@@ -232,5 +232,52 @@ public class PisosJdbcDao implements PisosDao {
 			if (con != null) {try{ con.close(); } catch (Exception ex){}};
 		}
 	}
+
+	@Override
+	public List<Pisos> PisosAgente(int id) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = null;
+
+		List<Pisos> Pisoss = new ArrayList<Pisos>();
+		try {
+			String SQL_DRV = "org.hsqldb.jdbcDriver";
+			String SQL_URL = "jdbc:hsqldb:hsql://localhost/localDB";
+
+			Class.forName(SQL_DRV);
+			con = DriverManager.getConnection(SQL_URL, "sa", "");
+			ps = con.prepareStatement("select * from Piso where IDAGENTE=?");
+			ps.setInt(1, id);
+						
+			rs = ps.executeQuery();
+			System.out.print("----------------------------------");
+
+			while (rs.next()) {
+				Pisos Pisos = new Pisos();
+				Pisos.setID(rs.getInt("ID"));
+				Pisos.setPrecio(rs.getDouble("PRECIO"));
+				Pisos.setIDAgente(rs.getInt("IDAGENTE"));
+				Pisos.setDireccion(rs.getString("DIRECCION"));
+				Pisos.setAnio(rs.getInt("ANIO"));
+				Pisos.setEstado(rs.getInt("ESTADO"));
+				Pisos.setCiudad(rs.getString("CIUDAD"));
+				Pisoss.add(Pisos);
+				
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new PersistenceException("Driver not found", e);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new PersistenceException("Invalid SQL or database schema", e);
+		} finally  {
+			if (rs != null) {try{ rs.close(); } catch (Exception ex){}};
+			if (ps != null) {try{ ps.close(); } catch (Exception ex){}};
+			if (con != null) {try{ con.close(); } catch (Exception ex){}};
+		}
+
+		return Pisoss;
+	}
 	
 }
