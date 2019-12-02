@@ -9,8 +9,6 @@ function Model(){
 //	Carga los datos del servicio sobreescribiendo el dato this.tbpisos.
 	this.load = function() {
 		this.tbpisos = PisosServicesRs.Pisos();
-		console.log(this.tbpisos);
-		console.log("entre");
 	}
 //	Llamamos al servicio de alta de pisos
 	this.add = function(pisos) {
@@ -87,9 +85,7 @@ function View(){
 				+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>" + "</tr>"
 				+ "</thead>" + "<tbody>" + "</tbody>");
 		for ( var i in lista) {
-			console.log("hola");
 			var pisos = lista[i];
-			console.log("hola");
 			$("#tblList tbody").append("<tr> <td>"
 					+ "<img src='icons/edit.png' class='btnEdit'/>"
 					+ "<img src='icons/delete.png' class='btnDelete'/> </td>"
@@ -97,21 +93,36 @@ function View(){
 					+ "<td>" + pisos.direccion + "</td>" + "<td>" + pisos.precio + "</td>"
 					+ "<td>" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
 		}
+		
 	}
 	
 	this.listapublica = function(lista) {
 		$("#tblListpublica").html("");
 		$("#tblListpublica").html( "<thead>" + "<tr>" + "<th></th>"
-				+ "<th>ID</th>" + "<th>IDAgente</th>" + "<th>direccion</th>"
-				+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>" + "</tr>"
-				+ "</thead>" + "<tbody>" + "</tbody>");
+				+ "<th class=\"ID\">ID</th>" + "<th class=\"IDAgente\">IDAgente</th>" + "<th class=\"direccion\">direccion</th>"
+				+ "<th class=\"precio\">precio</th>" + "<th class=\"ciudad\">ciudad</th>"+"<th class=\"anio\">anio</th>"+"<th class=\"estado\">estado</th>" + "</tr>"
+				+ "</thead>" + "<tbody id=\"busqueda\" >" + "</tbody>");
 		for ( var i in lista) {
 			var pisos = lista[i];
 			$("#tblListpublica tbody").append("<tr> <td>"
 					+ "<td>" + pisos.ID + "</td>" + "<td>" + pisos.IDAgente + "</td>"
 					+ "<td>" + pisos.direccion + "</td>" + "<td>" + pisos.precio + "</td>"
-					+ "<td>" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
+					+ "<td class=\"ciudad\">"+ pisos.ciudad +"</td>"
+					+ "<td>" + pisos.anio + "</td>"
+					+ "<td>" +pisos.estado + "</td>"+"</td></tr>");
 		}
+		 $("table").tablesorter({
+			    theme : 'blue',
+
+			    headers: {
+			      // disable sorting of the first & second column - before we would have to had made two entries
+			      // note that "first-name" is a class on the span INSIDE the first column th cell
+			      '.ID, .IDAgente, .direccion, .ciudad, .anio, .estado' : {
+			        // disable it by setting the property sorter to false
+			        sorter: false
+			      }
+			    }
+			  });
 	}
 
 	this.loadPisosFromForm = function() {
@@ -137,7 +148,6 @@ function View(){
 		$("#ciudad").val(pisos.ciudad);
 		$("#anio").val(pisos.anio);
 		$("#estado").val(pisos.estado);
-
 		$("#ID").focus(); // Ponemos el foco en el campo Nombre.
 	}
 
@@ -164,12 +174,9 @@ function View(){
 			$("#tblListprivada tbody").append("<tr> <td>"
 					+ "<td>" + pisos.ID + "</td>" + "<td>" + pisos.IDAgente + "</td>"
 					+ "<td>" + pisos.direccion + "</td>" + "<td>" + pisos.precio + "</td>"
-					+ "<td>" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
+					+ "<td class=\"ciudad\">" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
 		}
-	}
-	
-
-	
+	}	
 };
 
 
@@ -212,6 +219,7 @@ function Controller(varmodel, varview) {
 		// Pisos o el editado
 		that.view.list(that.model.tbPisos);
 	});
+	
 
 //	Manejador del enlace de edición de un alumno en la tabla
 	$("#tblList").on("click", ".btnEdit",
@@ -228,6 +236,7 @@ function Controller(varmodel, varview) {
 		that.view.loadPisosInForm(pisosedit);
 	});
 	
+	
 	$("#tblList").on("click", ".btnDelete",
 //			Método que gestiona el evento de clickar en el evento
 			function(event) {
@@ -243,25 +252,24 @@ function Controller(varmodel, varview) {
 	});
 	
 	
-	
 	//Login.html al puslar el boton de registrarse
 	$("#login").bind("submit",
 			function(event) {
 		var login=$("#usernamelogin").val();
 		var pass=$("#passwdlogin").val();
-		var usuariocorrecto = that.model.login(login,pass);
-		
-		
-		
+		var usuariocorrecto = that.model.login(login,pass);	
 	});
 	
-	
-	
-	
-	
-	
-	
+	 $('#filtro').on("keyup",
+			 function(event) { 
+	        $("#tblListpublica td.ciudad:contains('" + $(this).val() + "')").parent().show();
+	        $("#tblListpublica td.ciudad:not(:contains('" + $(this).val() + "'))").parent().hide();
+	    });
+	 
+	 
+
 };
+
 
 $(function() {
 	// Creamos el modelo con los datos y la conexión al servicio web.
@@ -273,7 +281,3 @@ $(function() {
 	// Iniciamos la aplicación
 	control.init();
 });
-
-
-
-
