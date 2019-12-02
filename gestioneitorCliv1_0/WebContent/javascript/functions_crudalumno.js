@@ -68,17 +68,6 @@ function Model(){
 			location.href="menu.html";
 		}
 	}
-	
-	$("article").on('mouseover','#tblListpublica tr' , function(){
-		 path=$('#tblListapublica  td:eq(8)')
-		 var canvas = document.getElementById("ventana");
-         var ctx = canvas.getContext("2d");
- 		 var picture = new Image();
-
-		 picture.src="http://localhost:8080/gestioneitorv6_0"+path;	
-		 ctx.drawImage(picture,0,0,picture.width,picture.height,0,0,400,400);
-	});
-	
 };
 
 function View(){
@@ -134,6 +123,8 @@ function View(){
 			      }
 			    }
 			  });
+		 
+		 
 	}
 
 	this.loadPisosFromForm = function() {
@@ -263,6 +254,20 @@ function Controller(varmodel, varview) {
 //		editar
 		that.view.list(that.model.tbPisos);
 		alert("Eliminado Usuario");
+	});
+	
+
+	$("body").on('click','#tblListpublica tr' , function(){
+		//acceder al elemento 8 de cada cell
+		 path=this.cells.item(8).innerText;
+		 alert(path);
+		 var canvas = document.getElementById("ventana");
+         var ctx = canvas.getContext("2d");
+ 		 var picture = new Image();
+
+		 picture.src="http://localhost:8080/gestioneitorv6_0/images/"+path;	
+		 console.log(picture);
+		 ctx.drawImage(picture,0,0,picture.width,picture.height,0,0,400,400);
 	});
 	
 	
