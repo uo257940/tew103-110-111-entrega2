@@ -73,8 +73,10 @@ function Model(){
 		 path=$('#tblListapublica  td:eq(8)')
 		 var canvas = document.getElementById("ventana");
          var ctx = canvas.getContext("2d");
-		ventanaa.src="http://localhost:8080/gestioneitorv6_0"+path;	
-		ctx.drawImage(ventanaa,0,0,ventanaa.width,ventanaa.height,0,0,400,400);
+ 		 var picture = new Image();
+
+		 picture.src="http://localhost:8080/gestioneitorv6_0"+path;	
+		 ctx.drawImage(picture,0,0,picture.width,picture.height,0,0,400,400);
 	});
 	
 };
