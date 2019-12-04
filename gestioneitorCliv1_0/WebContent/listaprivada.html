@@ -21,8 +21,12 @@ Universidad de Oviedo
 <script type="text/javascript"
 	src="http://localhost:8080/gestioneitorv6_0/rest-jsapi"></script>
 <script type="text/javascript" src="javascript/functions_crudalumno.js"></script>
+<script type="text/javascript"
+	src="bootstrap/js/jquery.tablesorter.min.js"></script>
+
 
 <script>$(function() {
+	
 	// Creamos el modelo con los datos y la conexión al servicio web.
 	var model = new Model();
 	// Creamos la vista que incluye acceso al modelo.
@@ -32,7 +36,9 @@ Universidad de Oviedo
 	// Iniciamos la aplicación
 	control.init();
 	
-	var idAgente = window.localStorage.getItem("idAgente");
+	var idAgente = window.localStorage.getItem("ID");
+	alert(idAgente);
+	
 	model.tbpisosAgente = PisosServicesRs.PisosDeAgente({
 		id : idAgente});
 	

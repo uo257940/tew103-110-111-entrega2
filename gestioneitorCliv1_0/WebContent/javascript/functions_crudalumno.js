@@ -1,3 +1,4 @@
+
 function Model(){
 //	Lista de pisos.
 	this.tbpisos = null;
@@ -10,8 +11,7 @@ function Model(){
 //	Carga los datos del servicio sobreescribiendo el dato this.tbpisos.
 	this.load = function() {
 		this.tbpisos = PisosServicesRs.Pisos();
-		console.log(this.tbpisos);
-		console.log("entre");
+
 	}
 //	Llamamos al servicio de alta de pisos
 	this.add = function(pisos) {
@@ -64,13 +64,13 @@ function Model(){
 			alert("Usuario y contraseña incorrectos");
 		}
 		else{
-			window.localStorage.setItem("idAgente",idAgente);			
+
+			window.localStorage.setItem("ID",idAgente);
+			alert(window.localStorage.getItem("ID"));
 			location.href="menu.html";
 		}
 	}
-	
-	
-	
+		
 };
 
 function View(){
@@ -102,17 +102,18 @@ function View(){
 	this.listapublica = function(lista) {
 		$("#tblListpublica").html("");
 		$("#tblListpublica").html( "<thead>" + "<tr>" + "<th></th>"
-				+ "<th>ID</th>" + "<th>IDAgente</th>" + "<th>direccion</th>"
-				+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>" + "</tr>"
-				+ "</thead>" + "<tbody>" + "</tbody>");
+				+ "<th class=\"ID\">ID</th>" + "<th class=\"IDAgente\">IDAgente</th>" + "<th class=\"direccion\">direccion</th>"
+				+ "<th class=\"precio\">precio</th>" + "<th class=\"ciudad\">ciudad</th>"+"<th class=\"anio\">anio</th>"+"<th class=\"estado\">estado</th>"+ "<th class=\"imagen\">imagen</th>" + "</tr>"
+				+ "</thead>" + "<tbody id=\"busqueda\" >" + "</tbody>");
 		for ( var i in lista) {
 			var pisos = lista[i];
 			$("#tblListpublica tbody").append("<tr> <td>"
 					+ "<td>" + pisos.ID + "</td>" + "<td>" + pisos.IDAgente + "</td>"
 					+ "<td>" + pisos.direccion + "</td>" + "<td>" + pisos.precio + "</td>"
-					+ "<td>" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
+					+ "<td class=\"ciudad\">"+ pisos.ciudad +"</td>"
+					+ "<td>" + pisos.anio + "</td>"
+					+ "<td>" +pisos.estado + "</td>"+"<td> "+pisos.imagen + "</td>"+"</td></tr>");
 		}
-	}
 
 	this.loadPisosFromForm = function() {
 		// Cogemos el pisos nuevo del formulario.
@@ -127,6 +128,25 @@ function View(){
 		};
 		return pisos;
 	}
+	
+	 $("table").tablesorter({
+		    theme : 'blue',
+
+		    headers: {
+		      // disable sorting of the first & second column - before we would have to had made two entries
+		      // note that "first-name" is a class on the span INSIDE the first column th cell
+		      '.ID, .IDAgente, .direccion, .ciudad, .anio, .estado, .imagen' : {
+		        // disable it by setting the property sorter to false
+		        sorter: false
+		      }
+		    }
+		  });
+	 
+	 
+}
+	
+	
+	
 
 	this.loadPisosInForm = function(pisos) {
 		// Pintamos los datos pisos sobre el formularios de alta/edición
@@ -137,7 +157,7 @@ function View(){
 		$("#ciudad").val(pisos.ciudad);
 		$("#anio").val(pisos.anio);
 		$("#estado").val(pisos.estado);
-
+		$("#imagen").val(pisos.imagen);
 		$("#ID").focus(); // Ponemos el foco en el campo Nombre.
 	}
 
@@ -256,9 +276,31 @@ function Controller(varmodel, varview) {
 	});
 	
 	
+	$("body").on('mouseover','#tblListpublica tr' , function(){
+		//acceder al elemento 8 de cada cell
+		 path=this.cells.item(8).innerText;
+		 var canvas = document.getElementById("ventana");
+         var ctx = canvas.getContext("2d");
+ 		 var picture = new Image();
+
+		 picture.src="http://localhost:8080/gestioneitorv6_0/images/"+path;	
+		 console.log(picture);
+		 ctx.drawImage(picture,0,0,picture.width,picture.height,0,0,400,400);
+	});
+	
+	
+	 $('#filtro').on("keyup",
+			 function(event) { 
+	        $("#tblListpublica td.ciudad:contains('" + $(this).val() + "')").parent().show();
+	        $("#tblListpublica td.ciudad:not(:contains('" + $(this).val() + "'))").parent().hide();
+	    });
+	 
+
+	
+	
 	$("#btnAccederListaPrivada").on("click",
 			function (event){
-		//that.view.listaprivada(that.model.tbpisosAgente);
+		
 		location.href="listaprivada.html";
 	});
 	
@@ -288,7 +330,4 @@ $(function() {
 	// Iniciamos la aplicación
 	control.init();
 });
-
-
-
 
