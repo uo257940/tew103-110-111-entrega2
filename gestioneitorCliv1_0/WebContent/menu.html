@@ -14,7 +14,19 @@
 	src="jquery/Jquery-1.11.3.min.js"></script>
 <script
 	src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="javascript/functions_crudalumno.js"></script>
 	
+<script>$(function() {
+	// Creamos el modelo con los datos y la conexión al servicio web.
+	var model = new Model();
+	// Creamos la vista que incluye acceso al modelo.
+	var view = new View();
+	// Creamos el controlador
+	var control = new Controller(model, view);
+	// Iniciamos la aplicación
+	control.init();
+});
+</script>
 
 </head>
 <body style="background-color: #E3CAA1">
@@ -28,13 +40,14 @@
 					enctype="application/x-www-form-urlencoded">
 		
 		
-		<button id="btnAccederListaPrivada" class="btn btn-default" onclick="location.href='listaprivada.html'"  >Listado de sus pisos</button>
+		<button id="btnAccederListaPrivada" class="btn btn-default"   >Listado de sus pisos</button>
 		<p></p>
 		<button type="reset" class="btn btn-default">Importar Base de datos</button>
 		<p></p>
 		<button type="reset" class="btn btn-default">Reiniciar Base de datos</button>
 		
 		</form>
+				
 
 
 </body>
