@@ -257,10 +257,9 @@ function Controller(varmodel, varview) {
 	});
 	
 
-	$("body").on('click','#tblListpublica tr' , function(){
+	$("body").on('mouseover','#tblListpublica tr' , function(){
 		//acceder al elemento 8 de cada cell
 		 path=this.cells.item(8).innerText;
-		 alert(path);
 		 var canvas = document.getElementById("ventana");
          var ctx = canvas.getContext("2d");
  		 var picture = new Image();
