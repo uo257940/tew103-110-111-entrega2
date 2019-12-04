@@ -261,6 +261,19 @@ function Controller(varmodel, varview) {
 		//that.view.listaprivada(that.model.tbpisosAgente);
 		location.href="listaprivada.html";
 	});
+	
+	
+	$("#tblListprivada").on("click", ".btnDelete",
+
+			function(event) {
+
+		var id_pisos = that.view.getIdPisos($(this));
+		var pisosedit = that.model.remove(id_pisos);
+		that.view.listaprivada(that.model.tbPisos);
+		location.href="listaprivada.html";
+	});
+	
+
 		
 	
 };

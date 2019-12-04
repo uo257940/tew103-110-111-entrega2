@@ -1,0 +1,71 @@
+
+<!-- 
+****************************************************
+Asignatura: Tecnologías Web
+Titulación: GIITIN
+Autor     : Cabal
+Universidad de Oviedo
+***************************************************
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tecnologias Web</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<script src="jquery/Jquery-1.11.3.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="http://localhost:8080/gestioneitorv6_0/rest-jsapi"></script>
+<script type="text/javascript" src="javascript/functions_crudalumno.js"></script>
+
+</head>
+<body style="background-color: #E3CAA1">
+	<section>
+		<article>
+			<h3>Formulario de Pisos:</h3>
+			<form id="frmCRUDPisos">
+				<div class="form-group">
+					<label for="id">ID:</label> <input type="text" id="ID"
+						readonly="readonly" class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="iduser">IDAgente:</label> <input type="text" id="IDAgente"
+						required class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="nombre">Precio:</label> <input type="text" id="precio"
+						required class="form-control" size="25" />
+				</div>
+				<div class="form-group">
+					<label for="nombre">Direccion:</label> <input type="text" id="direccion"
+						required class="form-control" size="25" />
+				</div>
+				<div class="form-group">
+					<label for="nombre">Ciudad:</label> <input type="text" id="ciudad"
+						required class="form-control" size="25" />
+				</div>
+				<div class="form-group">
+					<label for="nombre">Año:</label> <input type="text" id="anio"
+						required class="form-control" size="25" />
+				</div>
+				<div class="form-group">
+					<label for="nombre">Estado:</label> <input type="text" id="estado"
+						required class="form-control" size="25" />
+				</div>
+
+				<input type="submit" value="Salvar" id="btnSave" required
+					class="btn btn-default" /> <input type="reset" value="Reset"
+					id="btnReset" required class="btn btn-default" />
+			</form>
+		</article>
+		<article class="table-responsive">
+			<table class="table table-striped table-responsive" id="tblList">
+			</table>
+		</article>
+	</section>
+</body>
+</html>
