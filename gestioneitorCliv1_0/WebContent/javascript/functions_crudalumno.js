@@ -66,7 +66,6 @@ function Model(){
 		else{
 
 			window.localStorage.setItem("ID",idAgente);
-			alert(window.localStorage.getItem("ID"));
 			location.href="menu.html";
 		}
 	}
@@ -125,6 +124,21 @@ function View(){
 				ciudad : $("#ciudad").val(),
 				anio : $("#anio").val(),
 				estado : $("#estado").val()
+		};
+		return pisos;
+	}
+	
+	
+	this.loadPisosFromFormAlta = function() {
+		// Cogemos el pisos nuevo del formulario.
+		var pisos = {
+				
+				direccion : $("#direccion").val(),
+				precio : $("#precio").val(),
+				ciudad : $("#ciudad").val(),
+				anio : $("#anio").val(),
+				estado : $("#estado").val(),
+				imagen : $("#imagen").val(),
 		};
 		return pisos;
 	}
@@ -314,6 +328,26 @@ function Controller(varmodel, varview) {
 		that.view.listaprivada(that.model.tbPisos);
 		location.href="listaprivada.html";
 	});
+	
+	
+	$("#frmAltaPisos").bind("submit",
+			function(event) {
+
+		var pisos = that.view.loadPisosFromFormAlta();
+		pisos.IDAgente = window.localStorage.getItem("ID");
+		that.model.add(pisos);
+		alert("Piso registrado correctamente");
+		location.href="listaprivada.html";
+
+	});
+	
+	$("#btnAtras").on("click",
+			function (event){
+		
+		location.href="listaprivada.html";
+	});
+	
+	
 	
 
 		
