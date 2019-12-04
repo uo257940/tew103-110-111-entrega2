@@ -1,9 +1,9 @@
 function Model(){
 //	Lista de pisos.
 	this.tbpisos = null;
-
 // 	ID del agente
 	this.idAgente=0;
+	this.reinicio="";
 	
 	
 //	Carga los datos del servicio sobreescribiendo el dato this.tbpisos.
@@ -50,6 +50,16 @@ function Model(){
 		var pisos = this.tbpisos.find(checkPisos);
 		return pisos;
 	} 
+	
+	this.reinicia = function(){
+		reinicia=PisosServicesRs.reinicia();
+		if(reinicia==""){
+			alert("PROBLEMAS AL REINICIAR");
+		}
+		else{
+			alert("Se ha reiniciado correctamente, Se echa al usuario");
+		}
+	}
 	
 	
 	
@@ -282,6 +292,12 @@ function Controller(varmodel, varview) {
 			 function(event) { 
 	        $("#tblListpublica td.ciudad:contains('" + $(this).val() + "')").parent().show();
 	        $("#tblListpublica td.ciudad:not(:contains('" + $(this).val() + "'))").parent().hide();
+	    });
+	 
+	 $('#reinicia').on("click",
+			 function(event) {
+		    that.model.reinicia();
+			location.href="index.html";
 	    });
 	 
 };

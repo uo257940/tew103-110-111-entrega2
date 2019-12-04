@@ -12,11 +12,13 @@ import com.tew.business.exception.EntityAlreadyExistsException;
 import com.tew.business.exception.EntityNotFoundException;
 import com.tew.business.resteasy.PisosServicesRs;
 import com.tew.model.Pisos;
+import com.tew.persistence.exception.NotPersistedException;
 
 import impl.tew.business.classes.PisosAlta;
 import impl.tew.business.classes.PisosBaja;
 import impl.tew.business.classes.PisosBuscar;
 import impl.tew.business.classes.PisosListado;
+import impl.tew.business.classes.PisosReinicia;
 import impl.tew.business.classes.PisosUpdate;
 
 public class PisosServicesRsImpl implements PisosServicesRs {
@@ -24,7 +26,7 @@ public class PisosServicesRsImpl implements PisosServicesRs {
 	@Override
 	public List<Pisos> Pisos() {
 		try {
-			
+
 			return new  PisosListado().Pisos();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -51,5 +53,11 @@ public class PisosServicesRsImpl implements PisosServicesRs {
 	public Pisos findById(int id) throws EntityNotFoundException {
 		return new PisosBuscar().find(id);
 	}
+
+	@Override
+	public String reinicia() throws EntityNotFoundException, NotPersistedException {
+		return new PisosReinicia().reinicia();
+	}
 	
 }
+

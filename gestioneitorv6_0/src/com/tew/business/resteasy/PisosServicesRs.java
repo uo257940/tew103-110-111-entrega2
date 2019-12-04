@@ -8,6 +8,7 @@ import com.tew.business.PisosService;
 import com.tew.business.exception.EntityAlreadyExistsException;
 import com.tew.business.exception.EntityNotFoundException;
 import com.tew.model.Pisos;
+import com.tew.persistence.exception.NotPersistedException;
 
 // URL en la que el web service responderá
 @Path("/PisosServicesRs")
@@ -40,4 +41,10 @@ public interface PisosServicesRs extends PisosService{
    // formato en que los datos se reciben en el método
    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
    void updatePisos(Pisos Pisos) throws EntityNotFoundException;
+
+   // responde a peticiones GET
+   @GET
+   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+   public String reinicia() throws EntityNotFoundException, NotPersistedException;
+   
 }	

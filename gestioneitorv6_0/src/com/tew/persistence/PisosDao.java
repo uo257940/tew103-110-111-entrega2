@@ -19,4 +19,5 @@ public interface PisosDao {
 	void update(Pisos a) throws NotPersistedException;
 	void delete(int id) throws NotPersistedException;
 	Pisos findById(int id);
+	String reinicia();
 }

@@ -20,4 +20,5 @@ public interface PisosService {
 	void savePisos(Pisos piso) throws EntityAlreadyExistsException;
 	void updatePisos(Pisos piso) throws EntityNotFoundException;
 	void deletePisos(int id) throws EntityNotFoundException;
+	String reinicia() throws EntityNotFoundException, NotPersistedException ;
 }

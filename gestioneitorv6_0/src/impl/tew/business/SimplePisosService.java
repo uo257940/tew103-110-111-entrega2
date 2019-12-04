@@ -43,4 +43,9 @@ public class SimplePisosService implements PisosService {
 	public Pisos findById(int id) throws EntityNotFoundException {
 		return new PisosBuscar().find(id);
 	}
+	
+	@Override
+	public String reinicia() throws EntityNotFoundException, NotPersistedException {
+		return new PisosReinicia().reinicia();
+	}
 }
