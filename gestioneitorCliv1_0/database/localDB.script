@@ -48,10 +48,8 @@ GRANT USAGE ON DOMAIN INFORMATION_SCHEMA.CHARACTER_DATA TO PUBLIC
 GRANT USAGE ON DOMAIN INFORMATION_SCHEMA.SQL_IDENTIFIER TO PUBLIC
 GRANT DBA TO SA
 SET SCHEMA PUBLIC
-INSERT INTO AGENTE VALUES(1,'agente1@micorreo.com','agente1@micorreo.com')
-INSERT INTO AGENTE VALUES(2,'agente2@micorreo.com','agente2@micorreo.com')
-INSERT INTO AGENTE VALUES(3,'AGENTE3','AGENTE3')
-INSERT INTO AGENTE VALUES(4,'AGENTE4','AGENTE4')
+INSERT INTO AGENTE VALUES(1,'agente1','clave1')
+INSERT INTO AGENTE VALUES(2,'agente2','clave2')
 INSERT INTO PISO VALUES(1,1,180000,'Calle Uria 21','Oviedo',2019,4,'piso1.jpg')
 INSERT INTO PISO VALUES(2,1,200000,'Calle La villa 3','Oviedo',2019,2,'piso1.jpg')
 INSERT INTO PISO VALUES(3,1,195000,'Calle Alfonso II 6','Oviedo',2019,3,'piso1.jpg')
@@ -66,8 +64,3 @@ INSERT INTO PISO VALUES(11,2,120000,'Calle Manuel Llaneza 25','Villaviciosa',201
 INSERT INTO PISO VALUES(12,2,165000,'Calle Ezcurdia 11','Gijon',2019,4,'piso2.jpg')
 INSERT INTO PISO VALUES(13,2,350000,'Avenida constitucion 38','Gijon',2019,2,'piso2.jpg')
 INSERT INTO PISO VALUES(14,2,120000,'Calle Manuel Llaneza 14','Villaviciosa',2019,5,'piso2.jpg')
-INSERT INTO PISO VALUES(15,3,90000,'Calle Rio cubia 2','Aviles',2019,5,'piso2.jpg')
-INSERT INTO PISO VALUES(16,3,130000,'Calle puerto somiedo 6','Aviles',2019,1,'piso2.jpg')
-INSERT INTO PISO VALUES(17,4,100000,'Calle Felipe I','Pola Siero',2019,2,'piso2.jpg')
-INSERT INTO PISO VALUES(18,4,125000,'Calle de la reconquista 3','Oviedo',2019,1,'piso2.jpg')
-INSERT INTO PISO VALUES(19,4,80000,'Plaza de la paz 6','Llanera',2019,5,'piso2.jpg')
