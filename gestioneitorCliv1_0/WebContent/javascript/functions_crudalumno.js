@@ -10,33 +10,33 @@ function Model(){
 	
 //	Carga los datos del servicio sobreescribiendo el dato this.tbpisos.
 	this.load = function() {
-		this.tbpisos = PisosServicesRs.Pisos();
+		//this.tbpisos = PisosServicesRs.Pisos();
 
 	}
 //	Llamamos al servicio de alta de pisos
 	this.add = function(pisos) {
 //		Llamamos al servicio de alta de pisos
-		PisosServicesRs.savePisos({
+		/**PisosServicesRs.savePisos({
 			$entity : pisos,
 			$contentType : "application/json"
-		});
+		});**/
 //		Recargamos la lista de pisos.
 		this.load();
 	}
 //	Actualización de un pisos existente: PENDIENTE DE IMPLEMENTAR
 	this.edit = function(pisos) {
-		PisosServicesRs.updatePisos({
+		/**PisosServicesRs.updatePisos({
 			$entity : pisos,	
 			$contentType: "application/json"
-		});
+		});**/
 		this.load();
 
 	}
 //	Eliminación un pisos exist	ente
 	this.remove = function(id_pisos) {
-		PisosServicesRs.deletePisos({
+		/**PisosServicesRs.deletePisos({
 			id : id_pisos
-		});
+		});**/
 //		Recargamos la lista de pisos.
 		this.load();
 	}
@@ -318,6 +318,43 @@ function Controller(varmodel, varview) {
 		location.href="listaprivada.html";
 	});
 	
+	$("#btnImportarDB").on("click",
+			function (event){
+		
+		$.ajax({
+		url : "http://localhost:8080/gestioneitorv6_0/pisos.json",
+		type : "GET",
+		dataType : "json",
+		// Listado de pisos (función de callback)
+		success : function(pisos) {
+			var tbPisos=localStorage.getItem("tbPisos");
+			tbPisos=JSON.parse(tbPisos);
+			if (tbPisos == null)
+				tbPisos = [];
+			alert("Recibida respuesta con exito!");
+			//Para acceder a los datos de los pisos se puede recorrer así
+			for ( var i in pisos) {//Preparamos el registro de un piso
+				var piso = JSON.stringify({
+					ID : pisos[i].ID,
+					Precio : pisos[i].Precio,
+					Direccion: pisos[i].Direccion,
+					Ciudad: pisos[i].Ciudad,
+					Anio: pisos[i].Anyo,
+					Estado: pisos[i].Estado,
+					//foto : pisos[i].Foto,
+				});
+				tbPisos.push(piso);
+
+			}
+
+			console.log(tbPisos);
+			
+			// Remitir piso al servidor vía servicios web
+
+		} //Cierre de la función de callback
+	}); //Cierre del parámetro de .ajax
+	});
+	
 	
 	$("#tblListprivada").on("click", ".btnDelete",
 
@@ -364,4 +401,7 @@ $(function() {
 	// Iniciamos la aplicación
 	control.init();
 });
+
+
+
 
