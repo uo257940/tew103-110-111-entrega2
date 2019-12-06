@@ -10,33 +10,33 @@ function Model(){
 	
 //	Carga los datos del servicio sobreescribiendo el dato this.tbpisos.
 	this.load = function() {
-		//this.tbpisos = PisosServicesRs.Pisos();
+		this.tbpisos = PisosServicesRs.Pisos();
 
 	}
 //	Llamamos al servicio de alta de pisos
 	this.add = function(pisos) {
 //		Llamamos al servicio de alta de pisos
-		/**PisosServicesRs.savePisos({
+		PisosServicesRs.savePisos({
 			$entity : pisos,
 			$contentType : "application/json"
-		});**/
+		});
 //		Recargamos la lista de pisos.
 		this.load();
 	}
 //	Actualización de un pisos existente: PENDIENTE DE IMPLEMENTAR
 	this.edit = function(pisos) {
-		/**PisosServicesRs.updatePisos({
+		PisosServicesRs.updatePisos({
 			$entity : pisos,	
 			$contentType: "application/json"
-		});**/
+		});
 		this.load();
 
 	}
 //	Eliminación un pisos exist	ente
 	this.remove = function(id_pisos) {
-		/**PisosServicesRs.deletePisos({
+		PisosServicesRs.deletePisos({
 			id : id_pisos
-		});**/
+		});
 //		Recargamos la lista de pisos.
 		this.load();
 	}
@@ -336,14 +336,19 @@ function Controller(varmodel, varview) {
 			for ( var i in pisos) {//Preparamos el registro de un piso
 				var piso = JSON.stringify({
 					ID : pisos[i].ID,
+					IDAgente : window.localStorage.getItem("ID"),
 					Precio : pisos[i].Precio,
 					Direccion: pisos[i].Direccion,
 					Ciudad: pisos[i].Ciudad,
 					Anio: pisos[i].Anyo,
 					Estado: pisos[i].Estado,
-					//foto : pisos[i].Foto,
+					Foto : "foto1.jpg",
 				});
 				tbPisos.push(piso);
+				if(that.model.find(piso.ID)!= null){
+					that.model.edit(piso);
+				}
+				else that.model.add(piso);			
 
 			}
 
