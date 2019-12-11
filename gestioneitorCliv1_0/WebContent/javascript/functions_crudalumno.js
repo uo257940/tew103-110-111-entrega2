@@ -224,7 +224,9 @@ function Controller(varmodel, varview) {
 		this.model.load();
 		// Repintamos la lista de Pisos.
 		this.view.list(this.model.tbpisos);
+		localStorage.setItem("tbPisos", this.model.tbpisos)
 		this.view.listapublica(this.model.tbpisos)
+		
 		// MANEJADORES DE EVENTOS
 	}
 
@@ -327,32 +329,36 @@ function Controller(varmodel, varview) {
 		dataType : "json",
 		// Listado de pisos (función de callback)
 		success : function(pisos) {
-			var tbPisos=localStorage.getItem("tbPisos");
-			tbPisos=JSON.parse(tbPisos);
-			if (tbPisos == null)
-				tbPisos = [];
+			//var tbPisos=localStorage.getItem("tbPisos");
+			//alert(tbPisos);
+			//tbPisos=JSON.parse(tbPisos);
+			//if (tbPisos == null)
+				//tbPisos = [];
 			alert("Recibida respuesta con exito!");
 			//Para acceder a los datos de los pisos se puede recorrer así
 			for ( var i in pisos) {//Preparamos el registro de un piso
-				var piso = JSON.stringify({
+				var piso = ({
 					ID : pisos[i].ID,
 					IDAgente : window.localStorage.getItem("ID"),
-					Precio : pisos[i].Precio,
-					Direccion: pisos[i].Direccion,
-					Ciudad: pisos[i].Ciudad,
-					Anio: pisos[i].Anyo,
-					Estado: pisos[i].Estado,
-					Foto : "foto1.jpg",
+					precio : pisos[i].Precio,
+					direccion: pisos[i].Direccion,
+					ciudad: pisos[i].Ciudad,
+					anio: pisos[i].Anyo,
+					estado: pisos[i].Estado
 				});
-				tbPisos.push(piso);
+				//tbPisos.push(piso);
+				alert(that.model.find(piso.ID));
+				alert(piso.ID);
 				if(that.model.find(piso.ID)!= null){
 					that.model.edit(piso);
 				}
 				else that.model.add(piso);			
 
 			}
+			
+			alert("Lectura con exito!");
 
-			console.log(tbPisos);
+			//console.log(tbPisos);
 			
 			// Remitir piso al servidor vía servicios web
 
