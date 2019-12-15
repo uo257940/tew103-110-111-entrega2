@@ -1,6 +1,6 @@
 
 <!-- 
-****************************************************
+***************************************************
 Asignatura: Tecnologías Web
 Titulación: GIITIN
 Autor     : Cabal
@@ -21,6 +21,8 @@ Universidad de Oviedo
 <script type="text/javascript"
 	src="http://localhost:8080/gestioneitorv6_0/rest-jsapi"></script>
 <script type="text/javascript" src="javascript/functions_crudalumno.js"></script>
+<script type="text/javascript"
+	src="bootstrap/js/jquery.tablesorter.min.js"></script>
 
 <script>$(function() {
 	// Creamos el modelo con los datos y la conexión al servicio web.
@@ -32,6 +34,12 @@ Universidad de Oviedo
 	// Iniciamos la aplicación
 	control.init();
 
+	var idPiso = window.localStorage.getItem("IdPisoEditar");
+
+	var pisosedit = model.find(idPiso);
+
+	view.loadPisosInFormEdit(pisosedit);
+	
 });
 </script>
 
@@ -42,7 +50,7 @@ Universidad de Oviedo
 			<h3>Formulario de Pisos:</h3>
 			
 			<button id="btnAtras" class="btn btn-default"   >Volver a mi listado</button>
-			<form id="frmAltaPisos">
+			<form id="frmEdicionPisos">
 							
 				<div class="form-group">
 					<label for="nombre">Precio:</label> <input type="text" id="precio"

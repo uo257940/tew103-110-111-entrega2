@@ -75,21 +75,16 @@ public class PisosJdbcDao implements PisosDao {
 			Class.forName(SQL_DRV);
 			con = DriverManager.getConnection(SQL_URL, "sa", "");
 			
-			Pisos p = null;			
-			p = this.findById(id);
-			System.out.println(p.getID()+"-------------------------------------");
 								
 				ps = con.prepareStatement("delete from Piso where ID = ?");
 				ps.setInt(1, id);
 
 				rows = ps.executeUpdate();
-				if (rows != 1) {
-					throw new NotPersistedException("Piso " + id + " not found");
-				} 
+
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			throw new PersistenceException("Driver not found", e);
+			throw new PersistenceException("Drive not found", e);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Invalid SQL or database schema", e);

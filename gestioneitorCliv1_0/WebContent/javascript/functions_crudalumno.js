@@ -45,8 +45,6 @@ function Model(){
 		function checkPisos(obj) {
 			return obj.ID == id_pisos;
 		}
-		// Buscamos los datos del alumno cuyo id_alumno sea el mismo que el
-		// seleccionado
 		var pisos = this.tbpisos.find(checkPisos);
 		return pisos;
 	} 
@@ -203,6 +201,19 @@ function View(){
 						+ "<td>" + pisos.ciudad + "<td>" + pisos.anio + "<td>" + pisos.estado + "</td></tr>");
 			}
 		}
+	
+	
+	this.loadPisosInFormEdit = function(pisos) {
+		// Pintamos los datos pisos sobre el formularios de alta/edición
+
+		$("#direccion").val(pisos.direccion);
+		$("#precio").val(pisos.precio);
+		$("#ciudad").val(pisos.ciudad);
+		$("#anio").val(pisos.anio);
+		$("#estado").val(pisos.estado);
+		$("#imagen").val(pisos.imagen);
+
+	}
 	
 
 	
@@ -396,9 +407,27 @@ function Controller(varmodel, varview) {
 	});
 	
 	
-	
+	$("#tblListprivada").on("click", ".btnEdit",
 
+			function(event) {
+
+		var id_pisos = that.view.getIdPisos($(this));
+		window.localStorage.setItem("IdPisoEditar",id_pisos);
 		
+		location.href="edicionPiso.html";
+	});
+
+	$("#frmEdicionPisos").bind("submit",
+			function(event) {
+
+		var pisos = that.view.loadPisosFromFormAlta();
+		pisos.IDAgente = window.localStorage.getItem("ID");
+		pisos.ID = window.localStorage.getItem("IdPisoEditar");
+		that.model.edit(pisos);
+		alert("Piso actualizado correctamente");
+		location.href="listaprivada.html";
+
+	});
 	
 };
 
