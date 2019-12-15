@@ -340,12 +340,6 @@ function Controller(varmodel, varview) {
 		dataType : "json",
 		// Listado de pisos (función de callback)
 		success : function(pisos) {
-			//var tbPisos=localStorage.getItem("tbPisos");
-			//alert(tbPisos);
-			//tbPisos=JSON.parse(tbPisos);
-			//if (tbPisos == null)
-				//tbPisos = [];
-			alert("Recibida respuesta con exito!");
 			//Para acceder a los datos de los pisos se puede recorrer así
 			for ( var i in pisos) {//Preparamos el registro de un piso
 				var piso = ({
@@ -355,11 +349,10 @@ function Controller(varmodel, varview) {
 					direccion: pisos[i].Direccion,
 					ciudad: pisos[i].Ciudad,
 					anio: pisos[i].Anyo,
-					estado: pisos[i].Estado
+					estado: pisos[i].Estado,
+					imagen: "foto"+pisos[i].ID+".jpg"
 				});
-				//tbPisos.push(piso);
-				alert(that.model.find(piso.ID));
-				alert(piso.ID);
+			
 				if(that.model.find(piso.ID)!= null){
 					that.model.edit(piso);
 				}
@@ -367,13 +360,10 @@ function Controller(varmodel, varview) {
 
 			}
 			
-			alert("Lectura con exito!");
-
-			//console.log(tbPisos);
-			
-			// Remitir piso al servidor vía servicios web
-
+		alert("!Importación realizada con exito!");
 		} //Cierre de la función de callback
+		
+		
 	}); //Cierre del parámetro de .ajax
 	});
 	
