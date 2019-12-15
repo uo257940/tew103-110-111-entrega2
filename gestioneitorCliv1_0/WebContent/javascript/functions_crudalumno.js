@@ -331,7 +331,7 @@ function Controller(varmodel, varview) {
 		location.href="listaprivada.html";
 	});
 	
-	$("#btnImportarDB").on("click",
+	$("#btnImportarDB").unbind("click").bind("click",
 			function (event){
 		
 		$.ajax({
