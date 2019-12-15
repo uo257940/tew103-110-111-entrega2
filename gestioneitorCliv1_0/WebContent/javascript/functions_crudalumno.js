@@ -67,6 +67,13 @@ function Model(){
 			location.href="menu.html";
 		}
 	}
+	
+	//Cerramos la sesion
+	this.logout = function(){
+		alert("Se ha cerrado sesión")
+		window.localStorage.removeItem("ID");
+		location.href="index.html";
+	}
 		
 };
 
