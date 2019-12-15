@@ -56,7 +56,7 @@ Universidad de Oviedo
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="login.html" target="formulario"><span
 								class="glyphicon glyphicon-log-in"></span> Login</a></li>
-						<li><a href="login.html" target="formulario"><span
+						<li><a href="#" id="btn-logout" onclick="logout()"><span
 								class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 					</ul>
 				</div>
@@ -110,7 +110,12 @@ Universidad de Oviedo
 		</div>
 	</div>
 
-
+<script>//cerramos sesion
+function logout(){
+	alert("Logout")
+	window.localStorage.removeItem("ID");
+	location.href="index.html";
+}</script>
 
 </body>
 </html>
