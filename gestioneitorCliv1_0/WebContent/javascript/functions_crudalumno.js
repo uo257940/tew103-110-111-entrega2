@@ -340,8 +340,11 @@ function Controller(varmodel, varview) {
 	$("#btnImportarDB, #menuImportarDB").unbind("click").bind("click",
 			function (event){
 		
+		var urlimport = prompt("Introduce la dirección desde la que realizar la importación: ", "http://localhost:8080/gestioneitorv6_0/pisos.json");
+		
+		
 		$.ajax({
-		url : "http://localhost:8080/gestioneitorv6_0/pisos.json",
+		url : urlimport,
 		type : "GET",
 		dataType : "json",
 		// Listado de pisos (función de callback)
