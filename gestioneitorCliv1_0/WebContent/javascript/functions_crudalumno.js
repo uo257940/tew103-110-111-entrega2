@@ -70,7 +70,6 @@ function Model(){
 	
 	//Cerramos la sesion
 	this.logout = function(){
-		alert("Se ha cerrado sesión")
 		window.localStorage.removeItem("ID");
 		location.href="index.html";
 	}
@@ -372,6 +371,11 @@ function Controller(varmodel, varview) {
 		
 		
 	}); //Cierre del parámetro de .ajax
+	});
+	
+	$("#btnLogout").on("click",
+			function (event){
+			that.model.logout();
 	});
 	
 	

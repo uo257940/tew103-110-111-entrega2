@@ -38,8 +38,36 @@
 	
 		<div class="page-header">
 			<h1>Menu de agente</h1>
-
+			<!-- 
+		***************************************************
+		* MENU  DINAMICO **********************************
+		***************************************************
+		-->
+			<nav class="navbar navbar-default">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Gestioneitor</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">Pisos<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+							   	<li><a href="crudPisos.html" target="formulario">CRUD Piso</a></li>
+								<li><a href="listapublica.html" target="listapublica">Listado público de pisos</a></li>
+								<li><a href="listaprivada.html" target="listaprivada">Listado privado de pisos</a></li>
+								<li><a href="#" id="btnImportarDB">Importar base de datos</a></li>
+								<li><a href="#" id="btnReiniciarDB">Reiniciar base de datos</a></li>
+							</ul></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"  id="btnLogout" ><span
+								class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+					</ul>
+				</div>
+			</nav>
 		</div>
+		
+		
 		<form id="menu" action="#"
 					enctype="application/x-www-form-urlencoded">
 		
@@ -49,7 +77,8 @@
 		<button id="btnImportarDB" class="btn btn-default">Importar Base de datos</button>
 		<p></p>
 		<button type="reset" class="btn btn-default">Reiniciar Base de datos</button>
-		
+		<p></p>
+		<button id="btnLogout" class="btn btn-default">Cerrar sesión</button>
 		</form>
 				
 
