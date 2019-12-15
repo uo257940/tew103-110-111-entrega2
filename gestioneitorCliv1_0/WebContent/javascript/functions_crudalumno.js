@@ -337,7 +337,7 @@ function Controller(varmodel, varview) {
 		location.href="listaprivada.html";
 	});
 	
-	$("#btnImportarDB").unbind("click").bind("click",
+	$("#btnImportarDB, #menuImportarDB").unbind("click").bind("click",
 			function (event){
 		
 		$.ajax({
@@ -373,7 +373,7 @@ function Controller(varmodel, varview) {
 	}); //Cierre del parámetro de .ajax
 	});
 	
-	$("#btnLogout").on("click",
+	$("#btnLogout, #menuLogout").on("click",
 			function (event){
 			that.model.logout();
 	});
