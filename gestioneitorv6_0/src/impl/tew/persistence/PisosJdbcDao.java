@@ -84,7 +84,7 @@ public class PisosJdbcDao implements PisosDao {
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			throw new PersistenceException("Driver not found", e);
+			throw new PersistenceException("Drive not found", e);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Invalid SQL or database schema", e);
