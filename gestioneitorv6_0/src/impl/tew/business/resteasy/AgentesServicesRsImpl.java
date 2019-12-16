@@ -27,9 +27,6 @@ public class AgentesServicesRsImpl implements AgentesServicesRs {
 	}
 	}
 
-	
-	
-	
 
 	@Override
 	public List<Agente> Agentes() throws Exception {

@@ -20,4 +20,5 @@ public interface PisosDao {
 	void delete(int id) throws NotPersistedException;
 	Pisos findById(int id);
 	String reinicia();
+	List<Pisos> PisosAgente(int id);
 }

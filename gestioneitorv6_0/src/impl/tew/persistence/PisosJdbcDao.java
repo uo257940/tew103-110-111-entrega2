@@ -3,8 +3,6 @@ package impl.tew.persistence;
 import java.sql.*;
 import java.util.*;
 
-import javax.faces.context.FacesContext;
-
 import com.tew.model.Pisos;
 import com.tew.persistence.PisosDao;
 import com.tew.persistence.exception.*;
@@ -77,21 +75,16 @@ public class PisosJdbcDao implements PisosDao {
 			Class.forName(SQL_DRV);
 			con = DriverManager.getConnection(SQL_URL, "sa", "");
 			
-			Pisos p = null;			
-			p = this.findById(id);
-			System.out.println(p.getID()+"-------------------------------------");
 								
 				ps = con.prepareStatement("delete from Piso where ID = ?");
 				ps.setInt(1, id);
 
 				rows = ps.executeUpdate();
-				if (rows != 1) {
-					throw new NotPersistedException("Piso " + id + " not found");
-				} 
+
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			throw new PersistenceException("Driver not found", e);
+			throw new PersistenceException("Drive not found", e);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Invalid SQL or database schema", e);
@@ -147,6 +140,60 @@ public class PisosJdbcDao implements PisosDao {
 
 		return Pisos;
 	}
+	
+	public String reinicia() {
+		PreparedStatement ps = null;
+		Connection con = null;
+		int rows = 0;
+		
+		try {			
+
+			String SQL_DRV = "org.hsqldb.jdbcDriver";
+			String SQL_URL = "jdbc:hsqldb:hsql://localhost/localDB";
+
+			// Obtenemos la conexi��n a la base de datos.
+			Class.forName(SQL_DRV);
+			con = DriverManager.getConnection(SQL_URL, "sa", "");
+
+			ps = con.prepareStatement("delete from PISO");
+			rows = ps.executeUpdate();
+			
+			ps = con.prepareStatement("delete from AGENTE");
+			rows = ps.executeUpdate();
+			System.out.println("BORRADO DE TABLAS COMPLETADO");
+
+			rows = ps.executeUpdate();
+			
+			ps = con.prepareStatement("INSERT INTO AGENTE VALUES(1,'agente1','clave1')");	
+			rows = ps.executeUpdate();
+			
+			ps = con.prepareStatement("INSERT INTO AGENTE VALUES(2,'agente2','clave2')");	
+			rows = ps.executeUpdate();
+							
+			System.out.println("REINICIO DE LA BASE DE DATOS COMPLETADO");
+			
+			
+			
+			
+			
+			return "exito";
+			
+			
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new PersistenceException("Driver not found", e);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new PersistenceException("Invalid SQL or database schema", e);
+		}
+		finally  {
+			if (ps != null) {try{ ps.close(); } catch (Exception ex){}};
+			if (con != null) {try{ con.close(); } catch (Exception ex){}};
+		}
+	}
+	
+
 
 	@Override
 	public void save(Pisos a) throws AlreadyPersistedException {
@@ -236,57 +283,52 @@ public class PisosJdbcDao implements PisosDao {
 			if (con != null) {try{ con.close(); } catch (Exception ex){}};
 		}
 	}
-	
-public String reinicia() {
-		PreparedStatement ps = null;
-		Connection con = null;
-		int rows = 0;
-		
-		try {			
 
+	@Override
+	public List<Pisos> PisosAgente(int id) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = null;
+
+		List<Pisos> Pisoss = new ArrayList<Pisos>();
+		try {
 			String SQL_DRV = "org.hsqldb.jdbcDriver";
 			String SQL_URL = "jdbc:hsqldb:hsql://localhost/localDB";
 
-			// Obtenemos la conexi��n a la base de datos.
 			Class.forName(SQL_DRV);
 			con = DriverManager.getConnection(SQL_URL, "sa", "");
+			ps = con.prepareStatement("select * from Piso where IDAGENTE=?");
+			ps.setInt(1, id);
+						
+			rs = ps.executeQuery();
+			System.out.print("----------------------------------");
 
-			ps = con.prepareStatement("delete from PISO");
-			rows = ps.executeUpdate();
-			
-			ps = con.prepareStatement("delete from AGENTE");
-			rows = ps.executeUpdate();
-			System.out.println("BORRADO DE TABLAS COMPLETADO");
+			while (rs.next()) {
+				Pisos Pisos = new Pisos();
+				Pisos.setID(rs.getInt("ID"));
+				Pisos.setPrecio(rs.getDouble("PRECIO"));
+				Pisos.setIDAgente(rs.getInt("IDAGENTE"));
+				Pisos.setDireccion(rs.getString("DIRECCION"));
+				Pisos.setAnio(rs.getInt("ANIO"));
+				Pisos.setEstado(rs.getInt("ESTADO"));
+				Pisos.setCiudad(rs.getString("CIUDAD"));
+				Pisoss.add(Pisos);
+				
+			}
 
-			rows = ps.executeUpdate();
-			
-			ps = con.prepareStatement("INSERT INTO AGENTE VALUES(1,'agente1','clave1')");	
-			rows = ps.executeUpdate();
-			
-			ps = con.prepareStatement("INSERT INTO AGENTE VALUES(2,'agente2','clave2')");	
-			rows = ps.executeUpdate();
-							
-			System.out.println("REINICIO DE LA BASE DE DATOS COMPLETADO");
-			
-			
-			
-			
-			
-			return "exito";
-			
-			
-			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Driver not found", e);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Invalid SQL or database schema", e);
-		}
-		finally  {
+		} finally  {
+			if (rs != null) {try{ rs.close(); } catch (Exception ex){}};
 			if (ps != null) {try{ ps.close(); } catch (Exception ex){}};
 			if (con != null) {try{ con.close(); } catch (Exception ex){}};
 		}
+
+		return Pisoss;
 	}
 	
 }

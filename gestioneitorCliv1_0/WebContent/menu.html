@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +11,23 @@
 	src="jquery/Jquery-1.11.3.min.js"></script>
 <script
 	src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="javascript/functions_crudalumno.js"></script>
+	<script type="text/javascript" src="bootstrap/js/jquery.tablesorter.min.js"></script>
 	
+	<script type="text/javascript"
+	src="http://localhost:8080/gestioneitorv6_0/rest-jsapi"></script>
+	
+<script>$(function() {
+	// Creamos el modelo con los datos y la conexión al servicio web.
+	var model = new Model();
+	// Creamos la vista que incluye acceso al modelo.
+	var view = new View();
+	// Creamos el controlador
+	var control = new Controller(model, view);
+	// Iniciamos la aplicación
+	control.init();
+});
+</script>
 
 </head>
 <body style="background-color: #E3CAA1">
@@ -22,14 +35,50 @@
 	
 		<div class="page-header">
 			<h1>Menu de agente</h1>
-
+			<!-- 
+		***************************************************
+		* MENU  DINAMICO **********************************
+		***************************************************
+		-->
+			<nav class="navbar navbar-default">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Gestioneitor</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">Pisos<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+							   	<li><a href="crudPisos.html" target="formulario">CRUD Piso</a></li>
+								<li><a href="listapublica.html" target="listapublica">Listado público de pisos</a></li>
+								<li><a href="listaprivada.html" target="listaprivada">Listado privado de pisos</a></li>
+								<li><a href="#" id="menuImportarDB">Importar base de datos</a></li>
+								<li><a href="#" id="menuReiniciarDB">Reiniciar base de datos</a></li>
+							</ul></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"  id="menuLogout" ><span
+								class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+					</ul>
+				</div>
+			</nav>
 		</div>
 		
-		<button class="btn btn-default" onclick="location.href='listaprivada.html'">Listado de sus pisos</button>
+		
+		<form id="menu" action="#"
+					enctype="application/x-www-form-urlencoded">
+		
+		
+		<button id="btnAccederListaPrivada" class="btn btn-default"   >Listado de sus pisos</button>
 		<p></p>
-		<button type="reset" class="btn btn-default">Importar Base de datos</button>
+		<button id="btnImportarDB" class="btn btn-default">Importar Base de datos</button>
 		<p></p>
-		<button id="reinicia" type="reset" class="btn btn-default">Reiniciar Base de datos</button>
+		<button type="reset" class="btn btn-default">Reiniciar Base de datos</button>
+		<p></p>
+		<button id="btnLogout" class="btn btn-default">Cerrar sesión</button>
+		</form>
+				
+
 
 </body>
 </html>
