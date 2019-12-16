@@ -182,8 +182,8 @@ function View(){
 	this.listaprivada = function(listaPrivada) {
 		$("#tblListprivada").html("");
 		$("#tblListprivada").html( "<thead>" + "<tr>" + "<th></th>"
-				+ "<th>ID</th>" + "<th>IDAgente</th>" + "<th>direccion</th>"
-				+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>" +"<th>imagen</th>"+"</tr>"
+				+ "<th>ID</th>" + "<th>IDAgente</th>" + "<th>Direccion</th>"
+				+ "<th>Precio</th>" + "<th>Ciudad</th>"+"<th>Anio</th>"+"<th>Estado</th>" +"<th>Imagen</th>"+"</tr>"
 				+ "</thead>" + "<tbody>" + "</tbody>");
 		for ( var i in listaPrivada) {
 			var pisos = listaPrivada[i];
@@ -414,8 +414,8 @@ function View(){
 	this.list = function(lista) {
 		$("#tblList").html("");
 		$("#tblList").html( "<thead>" + "<tr>" + "<th></th>"
-				+ "<th>ID</th>" + "<th>IDAgente</th>" + "<th>direccion</th>"
-				+ "<th>precio</th>" + "<th>ciudad</th>"+"<th>anio</th>"+"<th>estado</th>" + "</tr>"
+				+ "<th>ID</th>" + "<th>IDAgente</th>" + "<th>Direccion</th>"
+				+ "<th>Precio</th>" + "<th>Ciudad</th>"+"<th>Año</th>"+"<th>Estado</th>" + "</tr>"
 				+ "</thead>" + "<tbody>" + "</tbody>");
 		for ( var i in lista) {
 			var pisos = lista[i];
@@ -431,8 +431,8 @@ function View(){
 	this.listapublica = function(lista) {
 		$("#tblListpublica").html("");
 		$("#tblListpublica").html( "<thead>" + "<tr>" + "<th></th>"
-				+ "<th class=\"ID\">ID</th>" + "<th class=\"IDAgente\">IDAgente</th>" + "<th class=\"direccion\">direccion</th>"
-				+ "<th class=\"precio\">precio</th>" + "<th class=\"ciudad\">ciudad</th>"+"<th class=\"anio\">anio</th>"+"<th class=\"estado\">estado</th>"+ "<th class=\"imagen\">imagen</th>" + "</tr>"
+				+ "<th class=\"ID\">ID</th>" + "<th class=\"IDAgente\">IDAgente</th>" + "<th class=\"direccion\">Dirección</th>"
+				+ "<th class=\"precio\">Precio</th>" + "<th class=\"ciudad\">Ciudad</th>"+"<th class=\"anio\">Año</th>"+"<th class=\"estado\">Estado</th>"+ "<th class=\"imagen\">Imagen</th>" + "</tr>"
 				+ "</thead>" + "<tbody id=\"busqueda\" >" + "</tbody>");
 		for ( var i in lista) {
 			var pisos = lista[i];
