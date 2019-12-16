@@ -370,10 +370,12 @@ function Controller(varmodel, varview) {
 			}
 			
 		alert("!Importación realizada con exito!");
+		location.reload();
 		} //Cierre de la función de callback
 		
 		
 	}); //Cierre del parámetro de .ajax
+		
 	});
 	
 	$("#btnLogout, #menuLogout").on("click",
