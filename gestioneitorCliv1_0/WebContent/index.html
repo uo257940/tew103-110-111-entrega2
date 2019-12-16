@@ -1,17 +1,7 @@
-
-<!-- 
-***************************************************
-Asignatura: Tecnologías Web
-Titulación: GIITIN
-Autor     : Cabal
-Universidad de Oviedo
-***************************************************
--->
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>Tecnologias Web</title>
+<title>Aplicación de Gestión de Pisos</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,27 +12,37 @@ Universidad de Oviedo
 <script
 	src="bootstrap/js/bootstrap.min.js"></script>
 <script src="https://www.w3schools.com/lib/w3.js"></script>
-<script type="text/javascript" src="bootstrap/js/jquery.tablesorter.min.js"></script>
+	<script type="text/javascript" src="javascript/functions_crudalumno.js"></script>
+	<script type="text/javascript" src="bootstrap/js/jquery.tablesorter.min.js"></script>
+	<script type="text/javascript"
+	src="http://localhost:8080/gestioneitorv6_0/rest-jsapi"></script>
+
+<script>$(function() {
+	
+		
+	// Creamos el modelo con los datos y la conexión al servicio web.
+	var model = new Model();
+	// Creamos la vista que incluye acceso al modelo.
+	var view = new View();
+	// Creamos el controlador
+	var control = new Controller(model, view);
+	// Iniciamos la aplicación
+	control.init();
+
+});
+</script>
 
 </head>
-<body style="background-color: #E3CAA1">
+<body style="background-color: #64D3D2">
 
 	<div class="container">
-		<!-- 
-	***************************************************
-	* CABECERA DE LA PAGINA ***************************
-	***************************************************
-	-->
+
 		<div class="page-header">
-			<h1>Tecnologias Web</h1>
-			<!-- 
-		***************************************************
-		* MENU  DINAMICO **********************************
-		***************************************************
-		-->
+			<h1>Aplicación de Gestión de Pisos</h1>
+
 			<nav class="navbar navbar-default">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Gestioneitor</a>
+					<a class="navbar-brand" href="#">Venta de Pisos</a>
 				</div>
 				<div>
 					<ul class="nav navbar-nav">
@@ -52,57 +52,43 @@ Universidad de Oviedo
 								<li><a href="listapublica.html" target="listapublica">Listado De Pisos</a></li>
 							</ul></li>
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="login.html" target="formulario"><span
-								class="glyphicon glyphicon-log-in"></span> Login</a></li>
-						<li><a href="#"><span
-								class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-					</ul>
 				</div>
 			</nav>
 		</div>
 		<div class="row">
-			<!-- 
-	***************************************************
-	* SECCION PRINCIPAL DE FORMULARIOS EXTERNOS********
-	***************************************************
-	-->
-			<div class="col-md-9">
-					<object name="listapublica" type="text/hetml" data="listapublica.html" width="100%"
-					height="425px"></object>
-			</div>
-
-
-			<!-- 
-	***************************************************
-	* ELEMENTO LATERAL INFORMATIVO ********************
-	***************************************************
-	-->
-			<div class="col-md-3 bg-info">
+		
+		<div class="col-md-3 bg-info">
 				<aside>
 					<header>
-						<h2>Proyecto Gestioneitor Cliente v1.0</h2>
+						<h2>Aplicacion Para le Gestion de Pisos</h2>
 					</header>
-					<p>En este proyecto se incorporan las siguientes
-						características:
+					<p>Proyecto realizado por:
 					<ol>
-						<li>CRUD de la entidad Pisos</li>
-						<li>Consumo de servicios Rest para las operaciones de CRUD anteriores</li>
+						<li>Alvaro Fernandez</li>
+						<li>Pedro Palacio</li>
+						<li>Alejandro Muñiz</li>
 					</ol>
 				</aside>
 			</div>
+
+			<div class="col-md-6" align="center">
+					<button id="btnAccederListaPublica" class="btn btn-default" >Ver todos los pisos</button>
+					<p></p>
+
+			</div>
+			
+			<div class="col-md-6" align="center">
+					<button id="btnAccederLogin" class="btn btn-default" >Iniciar Sesión</button>
+			</div>
+
+			
 		</div>
 
-		<!-- 
-	***************************************************
-	* ELEMENTO PIE DE NAVEGACION** ********************
-	***************************************************
-	-->
 		<div class="panel panel-default">
-			<div class="panel-footer">
+			<div class="panel-footer" style="border:1px solid black" align="center">
 				<nav>
 					<ul>
-						<li><a href="index.html">Casa</a></li>
+						<li><a >Tecnologias Web 2019</a></li>
 					</ul>
 				</nav>
 			</div>

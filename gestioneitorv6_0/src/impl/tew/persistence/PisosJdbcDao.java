@@ -160,7 +160,7 @@ public class PisosJdbcDao implements PisosDao {
 			
 			ps = con.prepareStatement("delete from AGENTE");
 			rows = ps.executeUpdate();
-			System.out.println("BORRADO DE TABLAS COMPLETADO");
+
 
 			rows = ps.executeUpdate();
 			
@@ -170,7 +170,7 @@ public class PisosJdbcDao implements PisosDao {
 			ps = con.prepareStatement("INSERT INTO AGENTE VALUES(2,'agente2','clave2')");	
 			rows = ps.executeUpdate();
 							
-			System.out.println("REINICIO DE LA BASE DE DATOS COMPLETADO");
+
 			
 			
 			

@@ -36,10 +36,36 @@ Universidad de Oviedo
 </script>
 
 </head>
-<body style="background-color: #E3CAA1">
+<body style="background-color: #64D3D2">
 	<section>
 		<article>
-			<h3>Formulario de Pisos:</h3>
+			
+			
+				<div class="page-header">
+			<h3>Datos Del Nuevo Piso</h3>
+
+				<nav class="navbar navbar-default">
+				<div class="navbar-header">
+					<a class="navbar-brand" >Venta de Pisos</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">Pisos<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="listapublica.html" target="listapublica">Listado De Pisos</a></li>
+							</ul></li>
+					</ul>
+					</div>
+				<div>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"  id="menuLogout" ><span
+								class="glyphicon glyphicon-log-out"></span> Salir de Sesión</a></li>
+								
+					</ul>
+				</div>
+			</nav>
+		</div>
 			
 			<button id="btnAtras" class="btn btn-default"   >Volver a mi listado</button>
 			<form id="frmAltaPisos">
@@ -61,9 +87,16 @@ Universidad de Oviedo
 						required class="form-control" size="25" />
 				</div>
 				<div class="form-group">
-					<label for="nombre">Estado:</label> <input type="text" id="estado"
-						required class="form-control" size="25" />
+					<label for="nombre">Estado:</label> <select id="estado">
+					<option>1</option>
+					<option selected="yes">2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					</select>
 				</div>
+				
+				
 				
 				<div class="form-group">
 					<label for="nombre">Imagen:</label> <input type="text" id="imagen"
@@ -76,5 +109,16 @@ Universidad de Oviedo
 			</form>
 		</article>
 	</section>
+	
+	<div class="panel panel-default">
+			<div class="panel-footer" style="border:1px solid black" align="center">
+				<nav>
+					<ul>
+						<li><a >Tecnologias Web 2019</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		
 </body>
 </html>

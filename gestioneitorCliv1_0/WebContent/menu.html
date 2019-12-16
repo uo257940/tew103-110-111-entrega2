@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Tecnologias Web</title>
+<title>Aplicación de Gestión de Pisos</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,11 +13,12 @@
 	src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="javascript/functions_crudalumno.js"></script>
 	<script type="text/javascript" src="bootstrap/js/jquery.tablesorter.min.js"></script>
-	
 	<script type="text/javascript"
 	src="http://localhost:8080/gestioneitorv6_0/rest-jsapi"></script>
 	
 <script>$(function() {
+	
+		
 	// Creamos el modelo con los datos y la conexión al servicio web.
 	var model = new Model();
 	// Creamos la vista que incluye acceso al modelo.
@@ -26,42 +27,34 @@
 	var control = new Controller(model, view);
 	// Iniciamos la aplicación
 	control.init();
+
 });
 </script>
 
 </head>
-<body style="background-color: #E3CAA1">
+<body style="background-color: #64D3D2">
 
 	
 		<div class="page-header">
 			<h1>Menu de agente</h1>
-			<!-- 
-		***************************************************
-		* MENU  DINAMICO **********************************
-		***************************************************
-		-->
+
 			<nav class="navbar navbar-default">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="menu.html">Gestioneitor</a>
+					<a class="navbar-brand" >Venta de Pisos</a>
 				</div>
 				<div>
 					<ul class="nav navbar-nav">
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">Pisos<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-							   	<li><a href="crudPisos.html" target="formulario">CRUD Piso</a></li>
-								<li><a href="listapublica.html" target="listapublica">Listado público de pisos</a></li>
-								<li><a href="listaprivada.html" target="listaprivada">Listado privado de pisos</a></li>
-								
+								<li><a href="listapublica.html" target="listapublica">Listado De Pisos</a></li>
 							</ul></li>
 					</ul>
-					<ul class="nav navbar-nav navbar-left">
-					<li><a href="#" id="menuImportarDB">Importar base de datos</a></li>
-								<li><a href="#" id="menuReiniciarDB">Reiniciar base de datos</a></li>
-					</ul>
+					</div>
+				<div>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#"  id="menuLogout" ><span
-								class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+								class="glyphicon glyphicon-log-out"></span> Salir de Sesión</a></li>
 								
 					</ul>
 				</div>
@@ -73,15 +66,25 @@
 					enctype="application/x-www-form-urlencoded">
 		
 		
-		<button id="btnAccederListaPrivada" class="btn btn-default"   >Listado de sus pisos</button>
+		<button id="btnAccederListaPrivada" class="btn btn-default" >Listado De Mis Pisos</button>
 		<p></p>
-		<button id="btnImportarDB" class="btn btn-default">Importar Base de datos</button>
+		<button id="btnImportarDB" class="btn btn-default">Importar Base De Datos</button>
 		<p></p>
-		<button id="reinicia" type="reset" class="btn btn-default">Reiniciar Base de datos</button>
+		<button id="reinicia" type="reset" class="btn btn-default">Reiniciar Base De Datos</button>
 		<p></p>
 		<button id="btnLogout" class="btn btn-default">Cerrar sesión</button>
 		</form>
-				
+		
+		<div class="panel panel-default">
+			<div class="panel-footer" style="border:1px solid black" align="center">
+				<nav>
+					<ul>
+						<li><a >Tecnologias Web 2019</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		
 
 
 </body>

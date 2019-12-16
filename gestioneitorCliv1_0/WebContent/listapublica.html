@@ -1,17 +1,8 @@
 
-<!-- 
-***************************************************
-Asignatura: Tecnologías Web
-Titulación: GIITIN
-Autor     : Cabal
-Universidad de Oviedo
-***************************************************
--->
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>Tecnologias Web</title>
+<title>Aplicación de Gestión de Pisos</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,25 +16,32 @@ Universidad de Oviedo
 	src="bootstrap/js/jquery.tablesorter.min.js"></script>
 
 </head>
-<body style="background-color: #E3CAA1">
+<body style="background-color: #64D3D2">
 	<section>
 		<article>
-			<h3>Listado De Pisos:</h3>
+			<h1>Listado De Pisos:</h1>
 		</article>
 		<article class="table-responsive">
-			<p>introduce un texto a buscar</p>
-			<input name="filtro" id="filtro" type="text" placeholder="Search..">
+			<p>Introduzca la ciudad que desee:</p>
+			<input name="filtro" id="filtro" type="text" placeholder="Buscar..">
 			<table class="table table-striped table-responsive tablesorter"
 				id="tblListpublica">
 			</table>
-	
-	
 
-	
 			<div class="text-center"style="position: fixed; right:0; bottom:0;">
 				<canvas class="rounded" id="ventana" width="250" height="300" ></canvas>
 			</div>		
 		</article>
 	</section>
+	<div class="panel panel-default">
+			<div class="panel-footer" style="border:1px solid black" align="center">
+				<nav>
+					<ul>
+						<li><a >Tecnologias Web 2019</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

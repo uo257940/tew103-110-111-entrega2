@@ -12,6 +12,7 @@ import com.tew.business.exception.EntityAlreadyExistsException;
 import com.tew.business.exception.EntityNotFoundException;
 import com.tew.business.resteasy.PisosServicesRs;
 import com.tew.model.Pisos;
+import com.tew.persistence.exception.NotPersistedException;
 
 import impl.tew.business.classes.PisosAlta;
 import impl.tew.business.classes.PisosBaja;

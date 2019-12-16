@@ -57,7 +57,7 @@ function Model(){
 			alert("PROBLEMAS AL REINICIAR");
 		}
 		else{
-			alert("Se ha reiniciado correctamente, Se echa al usuario");
+			alert("La base da datos ha sido reiniciada. Se procederá a expulsar al agente");
 		}
 	}
 	
@@ -372,7 +372,7 @@ function Model(){
 			alert("PROBLEMAS AL REINICIAR");
 		}
 		else{
-			alert("Se ha reiniciado correctamente, Se echa al usuario");
+			alert("La base da datos ha sido reiniciada. Se procederá a expulsar al agente");
 		}
 	}
 	
@@ -669,6 +669,20 @@ function Controller(varmodel, varview) {
 		location.href="listaprivada.html";
 	});
 	
+	$("#btnAccederListaPublica").on("click",
+			function (event){
+		
+		location.href="listapublica.html";
+	});
+	
+	$("#btnAccederLogin").on("click",
+			function (event){
+		
+		location.href="login.html";
+	});
+	
+	
+	
 	$("#btnImportarDB, #menuImportarDB").unbind("click").bind("click",
 			function (event){
 		
@@ -701,7 +715,7 @@ function Controller(varmodel, varview) {
 
 			}
 			
-		alert("!Importación realizada con exito!");
+		alert("Importación realizada con exito");
 		location.reload();
 		} //Cierre de la función de callback
 		
