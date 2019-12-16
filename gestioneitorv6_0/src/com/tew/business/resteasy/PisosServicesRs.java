@@ -37,7 +37,7 @@ public interface PisosServicesRs extends PisosService{
    void updatePisos(Pisos Pisos) throws EntityNotFoundException;
 
    // responde a peticiones GET
-   @GET
+   @DELETE
    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
    public String reinicia() throws EntityNotFoundException, NotPersistedException;
    

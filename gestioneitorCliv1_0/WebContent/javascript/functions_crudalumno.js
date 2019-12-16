@@ -121,6 +121,7 @@ function View(){
 					+ "<td>" + pisos.anio + "</td>"
 					+ "<td>" +pisos.estado + "</td>"+"<td> "+pisos.imagen + "</td>"+"</td></tr>");
 		}
+		
 		 $("table").tablesorter({
 			    theme : 'blue',
 
@@ -275,7 +276,6 @@ function Controller(varmodel, varview) {
  		 var picture = new Image();
 
 		 picture.src="http://localhost:8080/gestioneitorv6_0/images/"+path;	
-		 console.log(picture);
 		 ctx.drawImage(picture,0,0,picture.width,picture.height,0,0,400,400);
 	});
 	
@@ -763,14 +763,3 @@ function Controller(varmodel, varview) {
 	});
 	
 };
-
-$(function() {
-	// Creamos el modelo con los datos y la conexión al servicio web.
-	var model = new Model();
-	// Creamos la vista que incluye acceso al modelo.
-	var view = new View();
-	// Creamos el controlador
-	var control = new Controller(model, view);
-	// Iniciamos la aplicación
-	control.init();
-});
