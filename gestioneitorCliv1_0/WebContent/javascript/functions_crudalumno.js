@@ -672,8 +672,11 @@ function Controller(varmodel, varview) {
 	$("#btnImportarDB, #menuImportarDB").unbind("click").bind("click",
 			function (event){
 		
+		var urlimport = prompt("Introduce la dirección desde la que realizar la importación: ", "http://localhost:8080/gestioneitorv6_0/pisos.json");
+		
+		
 		$.ajax({
-		url : "http://localhost:8080/gestioneitorv6_0/pisos.json",
+		url : urlimport,
 		type : "GET",
 		dataType : "json",
 		// Listado de pisos (función de callback)
@@ -699,10 +702,12 @@ function Controller(varmodel, varview) {
 			}
 			
 		alert("!Importación realizada con exito!");
+		location.reload();
 		} //Cierre de la función de callback
 		
 		
 	}); //Cierre del parámetro de .ajax
+		
 	});
 	
 	$("#btnLogout, #menuLogout").on("click",
